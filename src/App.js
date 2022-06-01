@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Daftar from "./components/Daftar"
 import Navbar from "./components/Navbar";
 import Tiket from "./components/Tiket";
+import Beranda from "./components/Beranda";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="login" element={<Login />}/>
         <Route path="daftar" element={<Daftar />}/>
         <Route path="tiket" element={<Tiket />} />
+        <Route path="beranda" element={<Beranda />}/>
       </Routes>
       
     </div>

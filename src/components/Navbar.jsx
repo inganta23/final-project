@@ -13,7 +13,7 @@ const Navbar = () => {
     target_nav[0].classList.add("underline");
   };
   return (
-    <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center px-[26px] bg-[#1B69B3]">
+    <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center px-[26px] bg-[#1B69B3] z-[999]">
       <div>
         <img src={require("../assets/image 34.png")} alt="" />
       </div>

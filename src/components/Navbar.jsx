@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaHome, FaTicketAlt, FaHistory } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
 
 const Navbar = () => {
-
-    const handleActiveNav = (elm) =>{
-        let nav_item = document.getElementsByClassName("nav-item");
-        for(let i=0; i<nav_item.length; i++){
-          nav_item[i].classList.remove("underline")
-        }
-        elm.classList += " underline";
+  const handleActiveNav = (elm) => {
+    let nav_list = document.getElementsByClassName("nav-item");
+    let target_nav = document.getElementsByClassName(elm);
+    for (let i = 0; i < nav_list.length; i++) {
+      nav_list[i].classList.remove("underline");
     }
+    target_nav[0].classList.add("underline");
+  };
   return (
     <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center px-[26px] bg-[#1B69B3]">
       <div>
@@ -17,44 +19,40 @@ const Navbar = () => {
       </div>
 
       <ul className="flex text-white font-bold font">
-        <Link to="beranda" onClick={(e) => handleActiveNav(e.target.parentElement)}>
-          <li className="nav-item flex items-center">
-            <img
-              className="w-[25px] h-[19px]"
-              src={require("../assets/Vector.png")}
-              alt="icon"
-            />
-            <span>Beranda</span>
+        <Link to="beranda">
+          <li
+            className="nav-item beranda flex items-center"
+            onClick={() => handleActiveNav("beranda")}
+          >
+            <FaHome size={25} />
+            <span className="ml-2">Beranda</span>
           </li>
         </Link>
-        <Link to="tiket" onClick={(e) => handleActiveNav(e.target.parentElement)}>
-          <li className="nav-item flex items-center ml-3 md:ml-10">
-            <img
-              className="w-[25px] h-[19px]"
-              src={require("../assets/Tiket.png")}
-              alt="icon"
-            />
-            <span>Tiket</span>
+        <Link to="tiket" className="ml-3 md:ml-10">
+          <li
+            className="nav-item tiket flex items-center"
+            onClick={() => handleActiveNav("tiket")}
+          >
+            <FaTicketAlt size={25} />
+            <span className="ml-2">Tiket</span>
           </li>
         </Link>
-        <Link to="riwayat" onClick={(e) => handleActiveNav(e.target.parentElement)}>
-          <li className="nav-item flex items-center ml-3 md:ml-10">
-            <img
-              className="w-[25px] h-[19px]"
-              src={require("../assets/Riwayat.png")}
-              alt="icon"
-            />
-            <span>Riwayat</span>
+        <Link to="riwayat" className="ml-3 md:ml-10">
+          <li
+            className="nav-item riwayat flex items-center"
+            onClick={() => handleActiveNav("riwayat")}
+          >
+            <FaHistory size={20} />
+            <span className="ml-2">Riwayat</span>
           </li>
         </Link>
-        <Link to="login" onClick={(e) => handleActiveNav(e.target.parentElement)}>
-          <li className="nav-item flex items-center ml-3 md:ml-10">
-            <img
-              className="w-[25px] h-[19px]"
-              src={require("../assets/Akun.png")}
-              alt="icon"
-            />
-            <span>Akun</span>
+        <Link to="login" className="ml-3 md:ml-10">
+          <li
+            className="nav-item login flex items-center"
+            onClick={() => handleActiveNav("login")}
+          >
+            <MdAccountCircle size={27} />
+            <span className="ml-2">Akun</span>
           </li>
         </Link>
       </ul>

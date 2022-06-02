@@ -22,7 +22,7 @@ const Daftar = () => {
           <img src={require("../assets/image 93.png")} alt="Login" />
         </div>
         <div className="w-[356px] mx-auto flex flex-col">
-          <h2 className="text-center text-[#605F5F] mb-7">Login Akun</h2>
+          <h2 className="text-center text-[#605F5F] mb-7">Daftar Akun</h2>
           <label htmlFor="nama" className="mb-3">
             Nama Lengkap
           </label>

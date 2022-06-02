@@ -1,10 +1,9 @@
-import { TravelDetails } from "./pages/travelDetails";
-
+import { PayTicket } from "./pages/payTicket";
 
 function App() {
   return (
     <div className="App">
-      <TravelDetails/>
+      <PayTicket/>
     </div>
   );
 }

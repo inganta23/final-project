@@ -3,6 +3,7 @@ import { CardTravel } from '../components/cardTravel'
 import { CardContact } from '../components/cardContact'
 import { Title } from '../components/title'
 import { InputPassenger } from '../components/inputPassenger'
+import { Button } from '../components/button'
 
 export const TravelDetails = () => {
   return (
@@ -22,13 +23,7 @@ export const TravelDetails = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mb-4">
-        <div className='w-2/5'>
-          <button className="rounded-lg bg-orange-500 text-white py-2 px-4 w-full">
-            Lanjutkan
-          </button>
-        </div>
-      </div>
+     <Button name={"lanjutkan"}/>
     </>
   );
 }

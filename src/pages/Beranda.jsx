@@ -22,15 +22,15 @@ const Beranda = () => {
           </p>
         </Link>
         <img
-          src={require("../assets/annoncement(1).png")}
+          src={require("../assets/img/annoncement(1).png")}
           alt="pemberitahuan"
         />
         <img
-          src={require("../assets/annoncement(1).png")}
+          src={require("../assets/img/annoncement(1).png")}
           alt="pemberitahuan"
         />
         <img
-          src={require("../assets/annoncement(1).png")}
+          src={require("../assets/img/annoncement(1).png")}
           alt="pemberitahuan"
         />
       </div>

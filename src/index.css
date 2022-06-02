@@ -27,7 +27,7 @@
   }
 
   h2 {
-    @apply text-3xl sm:text-3xl;
+    @apply text-xl sm:text-3xl;
   }
 
   li {

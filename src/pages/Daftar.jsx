@@ -19,7 +19,7 @@ const Daftar = () => {
         onSubmit={handleDaftar}
       >
         <div className="mx-auto">
-          <img src={require("../assets/image 93.png")} alt="Login" />
+          <img src={require("../assets/img/image 93.png")} alt="Login" />
         </div>
         <div className="w-[356px] mx-auto flex flex-col">
           <h2 className="text-center text-[#605F5F] mb-7">Daftar Akun</h2>

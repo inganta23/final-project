@@ -5,6 +5,8 @@ module.exports = {
       colors: {
         midBlue: "#1B69B3",
         carbonGrey: "#605F5F",
+        lightGrey: "#AFAEAE",
+        orange: "#EB6B10"
       },
     },
   },

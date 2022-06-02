@@ -9,7 +9,7 @@ const Login = () => {
     <div className="flex justify-center items-center h-[90vh] mt-20">
       <form className="flex flex-col w-[520px] bg-[#fff] rounded-xl">
         <div className="mx-auto">
-          <img src={require("../assets/image 93.png")} alt="Login" />
+          <img src={require("../assets/img/image 93.png")} alt="Login" />
         </div>
         <div className="w-[356px] mx-auto flex flex-col">
           <h2 className="text-center text-[#605F5F] mb-7">Login Akun</h2>

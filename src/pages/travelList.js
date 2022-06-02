@@ -1,6 +1,6 @@
 import React from 'react'
 import { CardDate } from '../components/cardDate'
-import { CardTravelList } from '../components/cardTravelList'
+import { CardTravel } from '../components/cardTravel'
 
 export const TravelList = () => {
   return (
@@ -16,10 +16,10 @@ export const TravelList = () => {
           </div>
 
           <div className='mt-4'>
-            <CardTravelList />
-            <CardTravelList />
-            <CardTravelList />
-            <CardTravelList />
+            <CardTravel />
+            <CardTravel />
+            <CardTravel />
+            <CardTravel />
           </div>
         </div>
       </div>

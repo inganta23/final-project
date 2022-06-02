@@ -1,9 +1,9 @@
 import React from 'react';
 import { CgChevronRight } from "react-icons/cg";
 import logoKai from "../assets/img/logo-KAI.png";
-export const CardTravelList = () => {
+export const CardTravel = ({className}) => {
   return (
-    <div className="shadow-lg p-4 rounded-lg cursor-pointer bg-white my-2">
+    <div className={`shadow-lg p-4 rounded-lg cursor-pointer bg-white my-2 ${className}`}>
       <img src={logoKai} alt="" className="w-20 mb-2" />
       <div className="flex">
         <div className="flex-1">
@@ -17,7 +17,9 @@ export const CardTravelList = () => {
         </div>
         <div className="flex-1 text-right">
           <p className="text-lg uppercase text-midBlue font-bold">Rp. 90000</p>
-          <p className="text-xs capitalize mt-1 text-green-500 font-semibold">Tersedia</p>
+          <p className="text-xs capitalize mt-1 text-green-500 font-semibold">
+            Tersedia
+          </p>
           <p className="text-sm font-bold text-carbonGrey">GAMBIR(GMR)</p>
         </div>
       </div>
@@ -32,7 +34,9 @@ export const CardTravelList = () => {
           <p>
             <CgChevronRight className="block w-full text-lg" />
           </p>
-          <p className="text-sm bold mt-1 text-carbonGrey font-light">Durasi 3J 23m</p>
+          <p className="text-sm bold mt-1 text-carbonGrey font-light">
+            Durasi 3J 23m
+          </p>
         </div>
         <div className="flex-1 text-right">
           <p className="text-2xl capitalize mt-2 text-midBlue font-bold">

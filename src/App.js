@@ -1,10 +1,10 @@
-import { TravelList } from "./pages/travelList";
+import { TravelDetails } from "./pages/travelDetails";
 
 
 function App() {
   return (
     <div className="App">
-      <TravelList/>
+      <TravelDetails/>
     </div>
   );
 }

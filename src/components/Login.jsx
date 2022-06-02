@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="flex justify-center items-center h-[90vh] mt-20">
@@ -21,7 +21,7 @@ const Login = () => {
             type="text"
             name="email"
             value={email}
-            onChange ={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <label htmlFor="password" className="mb-3">
@@ -32,22 +32,22 @@ const Login = () => {
             type="password"
             name="password"
             value={password}
-            onChange ={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <small className="text-right text-[#1B69B3] text-base mb-8">
             lupa kata sandi?
           </small>
+          <button className="w-[329px] h-[43px] mx-auto mb-2" type="submit">
+            <b>Masuk</b>
+          </button>
+          <small className="text-center text-[#AFAEAE] text-base mb-16">
+            Tidak memiliki akun?
+            <Link to="/daftar" className="text-[#1B69B3] hover:underline">
+              Daftar Sekarang
+            </Link>
+          </small>
         </div>
-        <button className="w-[329px] h-[43px] mx-auto mb-2" type="submit">
-          <b>Masuk</b>
-        </button>
-        <small className="w-[356px] mx-auto text-center text-[#AFAEAE] text-base mb-16">
-          Tidak memiliki akun?
-          <Link to="/daftar" className="text-[#1B69B3] hover:underline">
-            Daftar Sekarang
-          </Link>
-        </small>
       </form>
     </div>
   );

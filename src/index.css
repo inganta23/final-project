@@ -4,10 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
-sprint-1/johanes/login
+
 @layer base {
+  html{
+    font-family: 'Roboto', sans-serif;
+  }
   body {
-    @apply bg-[#ecf0f3] text-[#1f2937] tracking-wide;
+    @apply bg-[#E5E5E5] text-[#1f2937] tracking-wide;
   }
 
   h1,
@@ -38,10 +41,6 @@ sprint-1/johanes/login
     @apply rounded-xl capitalize bg-[#EB6B10] text-white;
   }
 }
-*{
-    font-family: 'Roboto', sans-serif;
-}
-body{
-    background-color: #E5E5E5;
-}
- main
+
+
+

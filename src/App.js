@@ -7,6 +7,7 @@ import Beranda from "./pages/Beranda";
 import { PayTicket } from "./pages/PayTicket";
 import { TravelList } from "./pages/TravelList";
 import TiketLogin from "./pages/TiketLogin";
+import { TiketDetail } from "./pages/TiketDetail";
 
 
 function App() {
@@ -20,9 +21,10 @@ function App() {
         <Route path="beranda" element={<Beranda />}/>
       </Routes>      */}
       {/* <TiketLogin /> */}
-      <div className="mt-24"></div>
-      <PayTicket/>
-      <TravelList />
+      <TiketDetail />
+      {/* <div className="mt-24"></div> */}
+      {/* <PayTicket/> */}
+      {/* <TravelList /> */}
     </div>
   );
 }

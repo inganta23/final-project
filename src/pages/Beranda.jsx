@@ -27,7 +27,7 @@ const Beranda = ({token, refreshToken}) => {
     setIsToggle(!isToggle);
   }; 
  
-  if(token === null) return <h1 className="mt-[100px] text-center">Silahkon Login Terlebih dahulu</h1>
+  if(token === null) return <h1 className="mt-[100px] text-center">Silahkan Login Terlebih dahulu</h1>
   return (
     <div className="flex flex-col items-center mt-[140px]">
       <div className="p-5 md:p-10 bg-white flex items-center justify-center gap-5 rounded-xl relative flex-wrap m-6 max-w-[80%]">

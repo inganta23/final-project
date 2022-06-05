@@ -20,11 +20,11 @@ function App() {
         <Route path="tiket" element={<Tiket />} />
         <Route path="beranda" element={<Beranda />}/>
       </Routes>      */}
-      {/* <TiketLogin /> */}
+      <TiketLogin />
       <TiketDetail />
       {/* <div className="mt-24"></div> */}
-      {/* <PayTicket/> */}
-      {/* <TravelList /> */}
+      <PayTicket/>
+      <TravelList />
     </div>
   );
 }

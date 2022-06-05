@@ -4,10 +4,12 @@ import TiketItem from "../components/TiketItem";
 
 const TiketLogin = () => {
   return (
-    <div className="mt-[100px] flex flex-col items-center gap-5">
+    <div className="flex justify-center mt-24 mb-10">
+      <div className="w-3/5">
       <TiketItem />
       <TiketItem />
       <TiketItem />
+      </div>
     </div>
   );
 };

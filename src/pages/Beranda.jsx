@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   FaTrophy,
@@ -7,12 +7,27 @@ import {
   FaToggleOn,
 } from "react-icons/fa";
 import { RiArrowLeftRightFill } from "react-icons/ri";
+// import axios from "axios";
 
-const Beranda = () => {
+
+const Beranda = ({token, refreshToken}) => {
+  useEffect(() => {
+    refreshToken()
+  }, []);
+  // const cekToken = async () =>{
+  //   try {
+  //     const cek = await axios.get("http://localhost:5000/cek");
+  //     setLogin(cek.data.msg);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   const [isToggle, setIsToggle] = useState(false);
   const handleToggle = () => {
     setIsToggle(!isToggle);
-  };
+  }; 
+ 
+  if(token === null) return <h1 className="mt-[100px] text-center">Silahkon Login Terlebih dahulu</h1>
   return (
     <div className="flex flex-col items-center mt-[140px]">
       <div className="p-5 md:p-10 bg-white flex items-center justify-center gap-5 rounded-xl relative flex-wrap m-6 max-w-[80%]">
@@ -84,7 +99,7 @@ const Beranda = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
-            <div className="flex flex-col w-full sm:w-[45%]">
+            <div className="flex flex-col w-full sm:w-full">
               <label htmlFor="asal" className="text-base sm:mb-1">
                 Tanggal Berangkat
               </label>
@@ -96,7 +111,7 @@ const Beranda = () => {
                 required
               />
             </div>
-            {isToggle ? (
+            {/* {isToggle ? (
               <FaToggleOn
                 size={35}
                 color="#605F5F"
@@ -110,20 +125,7 @@ const Beranda = () => {
                 className="sm:mt-[20px] cursor-pointer"
                 onClick={handleToggle}
               />
-            )}
-
-            <div className="flex flex-col w-full sm:w-[45%]">
-              <label htmlFor="tujuan" className="text-base sm:mb-1">
-                Tanggal Kembali
-              </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
-                name="kembali"
-                placeholder="Tanggal Kembali"
-                required
-              />
-            </div>
+            )} */}
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[50%]">
@@ -144,17 +146,10 @@ const Beranda = () => {
               </label>
               <div className="flex gap-5">
                 <input
-                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-[50%]"
+                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
                   type="text"
                   name="penumpang"
                   placeholder="Dewasa"
-                  required
-                />
-                <input
-                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-[50%]"
-                  type="text"
-                  name="penumpang"
-                  placeholder="Bayi"
                   required
                 />
               </div>

@@ -1,16 +1,31 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Daftar = () => {
+  const navigate = useNavigate();
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [konfirmasi, setKonfirmasi] = useState("");
-  const [validasi, setValidasi] = useState(false);
+  // const [msg, setMsg] =useState('');
 
-  const handleDaftar = (e) => {
+  const handleDaftar = async(e) => {
     e.preventDefault();
-    konfirmasi === password ? setValidasi(false) : setValidasi(true);
+    try {
+      await axios.post('http://localhost:5000/users',{
+        name: nama,
+        email: email,
+        password: password,
+        confPassword: konfirmasi
+      });
+      navigate("/login");
+    } catch (error) {
+       if(error.response){
+         console.log(error.response.data);
+       }
+    }
   };
   return (
     <div className="flex justify-center items-center h-[90vh] mt-20">
@@ -67,7 +82,7 @@ const Daftar = () => {
             onChange={(e) => setKonfirmasi(e.target.value)}
             required
           />
-          {validasi && <small className="text-left text-[#c51111] text-sm">Konfrimasi berbeda dengan password</small>}
+          {/* <small className="text-left text-[#c51111] text-sm">Konfrimasi berbeda dengan password</small> */}
           <button className="w-[329px] h-[43px] mx-auto mb-2 mt-8" type="submit">
             <b>Daftar</b>
           </button>

@@ -1,6 +1,6 @@
 import React from 'react'
-import { CardDate } from '../components/cardDate'
-import { CardTravel } from '../components/cardTravel'
+import { CardDate } from '../components/CardDate'
+import { CardTravel } from '../components/CardTravel'
 
 export const TravelList = () => {
   return (

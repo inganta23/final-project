@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardTravel } from '../components/cardTravel'
+import { CardTravel } from '../components/CardTravel'
 import { CardContact } from '../components/cardContact'
 import { Title } from '../components/title'
 import { InputPassenger } from '../components/inputPassenger'

@@ -20,7 +20,7 @@ const Daftar = () => {
         password: password,
         confPassword: konfirmasi
       });
-      navigate("/login");
+      navigate("/");
     } catch (error) {
        if(error.response){
          console.log(error.response.data);

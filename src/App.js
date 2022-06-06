@@ -18,6 +18,14 @@ function App() {
   useEffect(() => {
     refreshToken();
   }, [token]);
+  // const cekToken = async () =>{
+  //   try {
+  //     const cek = await axios.get("http://localhost:5000/cek");
+  //     setLogin(cek.data.msg);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   const refreshToken = async () => {
     try {
       const response = await axios.get("http://localhost:5000/token");
@@ -38,7 +46,7 @@ function App() {
             token !== null ? (
               <h2 className="mt-[100px] text-center">Anda Sudah Login</h2>
             ) : (
-              <Login />
+              <Login setToken={setToken}/>
             )
           }
         />

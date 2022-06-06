@@ -13,15 +13,8 @@ import { RiArrowLeftRightFill } from "react-icons/ri";
 const Beranda = ({token, refreshToken}) => {
   useEffect(() => {
     refreshToken()
-  }, []);
-  // const cekToken = async () =>{
-  //   try {
-  //     const cek = await axios.get("http://localhost:5000/cek");
-  //     setLogin(cek.data.msg);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  }, [token]);
+  
   const [isToggle, setIsToggle] = useState(false);
   const handleToggle = () => {
     setIsToggle(!isToggle);

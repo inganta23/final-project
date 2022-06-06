@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setToken}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ const Login = () => {
   const handleLoginAuth = async(e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/login',{
+       await axios.post('http://localhost:5000/login',{
         email: email,
         password: password,
       });

@@ -9,6 +9,7 @@ import { PayTicket } from "./pages/payTicket";
 import TiketLogin from "./pages/TiketLogin";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { TravelList } from "./pages/travelList";
 
 function App() {
  
@@ -56,7 +57,9 @@ function App() {
           path="beranda"
           element={<Beranda token={token} refreshToken={refreshToken} />}
         />
+        <Route path="tickets" element={<TravelList />} />
       </Routes>
+      {/* <TravelList /> */}
       {/* <PayTicket/> */}
       {/* <TiketLogin /> */}
     </div>

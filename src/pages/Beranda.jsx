@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaTrophy,
   FaShoppingBasket,
@@ -14,11 +14,16 @@ const Beranda = ({token, refreshToken}) => {
   useEffect(() => {
     refreshToken()
   }, [token]);
-  
+  const navigate = useNavigate()
   const [isToggle, setIsToggle] = useState(false);
   const handleToggle = () => {
     setIsToggle(!isToggle);
   }; 
+
+  const handleBerandaSubmit = (e) =>{
+    e.preventDefault();
+    navigate("/tickets")
+  }
  
   if(token === null) return <h1 className="mt-[100px] text-center">Silahkan Login Terlebih dahulu</h1>
   return (
@@ -59,7 +64,7 @@ const Beranda = ({token, refreshToken}) => {
         </div>
       </div>
       <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
-        <form className="flex flex-col justify-center items-center">
+        <form className="flex flex-col justify-center items-center" onSubmit={handleBerandaSubmit}>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label htmlFor="asal" className="text-base sm:mb-1">
@@ -149,8 +154,8 @@ const Beranda = ({token, refreshToken}) => {
             </div>
           </div>
 
-          <button className="w-[80%] h-[43px] mb-2" type="submit">
-            <b>Cari</b>
+          <button className="w-[80%] h-[43px] mb-2 font-bold" type="submit">
+            Cari
           </button>
         </form>
       </div>

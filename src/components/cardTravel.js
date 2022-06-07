@@ -1,34 +1,35 @@
 import React from 'react';
 import { CgChevronRight } from "react-icons/cg";
 import logoKai from "../assets/img/logo-KAI.png";
-export const CardTravel = ({className}) => {
+export const CardTravel = ({className, kotaAsal, waktuBerangkat, kotaTujuan, waktuTiba, namaKereta, harga}) => {
+  const months = ["January", "February", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September", "October", "November", "December"];
   return (
     <div className={`shadow-lg p-4 rounded-lg cursor-pointer bg-white my-2 ${className}`}>
       <img src={logoKai} alt="" className="w-20 mb-2" />
       <div className="flex">
         <div className="flex-1">
           <p className="text-lg uppercase text-midBlue font-bold">
-            parahyangan
+            {namaKereta}
           </p>
           <p className="text-xs uppercase mt-1 font-light text-carbonGrey">
             Ekonomi
           </p>
-          <p className="text-sm font-bold text-carbonGrey">BANDUNG (BD)</p>
+          <p className="text-sm font-bold text-carbonGrey">{kotaAsal}</p>
         </div>
         <div className="flex-1 text-right">
           <p className="text-lg uppercase text-midBlue font-bold">Rp. 90000</p>
           <p className="text-xs capitalize mt-1 text-green-500 font-semibold">
             Tersedia
           </p>
-          <p className="text-sm font-bold text-carbonGrey">GAMBIR(GMR)</p>
+          <p className="text-sm font-bold text-carbonGrey">{kotaTujuan}</p>
         </div>
       </div>
       <div className="flex">
         <div className="flex-1">
           <p className="text-2xl capitalize mt-2 text-midBlue font-bold">
-            06:00
+            {waktuBerangkat.getHours() > 9 ? `${waktuBerangkat.getHours()}:00` : `0${waktuBerangkat.getHours()}:00`}
           </p>
-          <p className="text-sm font-bold text-carbonGrey">17 Sep 2021</p>
+          <p className="text-sm font-bold text-carbonGrey">{waktuBerangkat.getDate()+` ${months[waktuBerangkat.getMonth()]} ${waktuBerangkat.getFullYear()}`}</p>
         </div>
         <div className="flex-1 flex text-center flex-col mt-4 items-center">
           <p>
@@ -40,9 +41,9 @@ export const CardTravel = ({className}) => {
         </div>
         <div className="flex-1 text-right">
           <p className="text-2xl capitalize mt-2 text-midBlue font-bold">
-            09:23
+            {waktuTiba.getHours() > 9 ? `${waktuTiba.getHours()}:00` : `0${waktuTiba.getHours()}:00`}
           </p>
-          <p className="text-sm font-bold text-carbonGrey">17 Sep 2021</p>
+          <p className="text-sm font-bold text-carbonGrey">{waktuTiba.getDate()+` ${months[waktuTiba.getMonth()]} ${waktuTiba.getFullYear()}`}</p>
         </div>
       </div>
     </div>

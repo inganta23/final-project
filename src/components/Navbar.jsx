@@ -42,7 +42,7 @@ const Navbar = ({ token, nama, setToken }) => {
             <span className="ml-2">Beranda</span>
           </li>
         </Link>
-        <Link to="tiket" className="ml-3 md:ml-10">
+        <Link to="tickets" className="ml-3 md:ml-10">
           <li
             className="nav-item tiket flex items-center"
             onClick={() => handleActiveNav("tiket")}

@@ -3,20 +3,35 @@ import React, { useEffect, useState } from "react";
 import { CardDate } from "../components/cardDate";
 import { CardTravel } from "../components/cardTravel";
 
-export const TravelList = () => {
-  const [tickets, setTickets] = useState("");
+export const TravelList = ({allTickets, setAllTickets, setTicketDetailsId, tickets, setTickets, asal, setAsal, setTujuan, setDate, tujuan, date}) => {
+  
   useEffect(() => {
-    getTickets();
+    if(asal != '' || tujuan != '' || date != ''){
+      searchTickets();
+    }else{
+      setTickets(allTickets)
+    }
+    
   }, []);
 
-  const getTickets = async () => {
+  const searchTickets = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/tickets");
+      const response = await axios.post("http://localhost:5000/searchTickets",{
+        tanggal_berangkat: date,
+        kotaAsal: asal,
+        kotaTujuan: tujuan,
+        namaKereta: "PARAHYANGAN"
+      });
       setTickets({ Tickets: [...response.data] });
+      setAsal('')
+      setDate('')
+      setTujuan('')
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   return (
     <div>
@@ -32,7 +47,8 @@ export const TravelList = () => {
 
           <div className="mt-4">
             {tickets.Tickets?.map((ticket) => (
-              <CardTravel key={ticket.id} kotaAsal={ticket.kota_asal} waktuBerangkat={new Date(ticket.waktu_berangkat)} kotaTujuan={ticket.kota_tujuan} waktuTiba = {new Date(ticket.waktu_tiba)} namaKereta ={ticket.nama_kereta} harga={ticket.harga}/>
+              
+              <CardTravel setTicketDetailsId={setTicketDetailsId} key={ticket.id} ticketId={ticket.id} kotaAsal={ticket.kota_asal} waktuBerangkat={new Date(ticket.waktu_berangkat)} kotaTujuan={ticket.kota_tujuan} waktuTiba = {new Date(ticket.waktu_tiba)} namaKereta ={ticket.nama_kereta} harga={ticket.harga} />
             ))}
           </div>
         </div>

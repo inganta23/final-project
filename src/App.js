@@ -16,6 +16,12 @@ function App() {
   // const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
   const [nama, setNama] = useState("");
+  const [asal, setAsal] = useState("");
+  const [tujuan, setTujuan] = useState("");  
+  const [date, setDate] = useState("");
+  const [tickets, setTickets] = useState("");
+  const [ticketDetailsId, setTicketDetailsId] = useState(0);
+  const [allTickets, setAllTickets] = useState("");
   useEffect(() => {
     refreshToken();
   }, [token]);
@@ -52,12 +58,13 @@ function App() {
           }
         />
         <Route path="daftar" element={<Daftar />} />
-        <Route path="tiket" element={<Tiket />} />
+        {/* <Route path="tiket" element={<Tiket />} /> */}
         <Route
           path="beranda"
-          element={<Beranda token={token} refreshToken={refreshToken} />}
+          element={<Beranda allTickets={allTickets} setAllTickets={setAllTickets} token={token} refreshToken={refreshToken} asal={asal} setAsal={setAsal} tujuan={tujuan} setTujuan={setTujuan} date={date} setDate={setDate}/>}
         />
-        <Route path="tickets" element={<TravelList />} />
+        <Route path="tickets" element={<TravelList allTickets={allTickets} setAllTickets={setAllTickets} setTicketDetailsId={setTicketDetailsId} tickets={tickets} setTickets={setTickets} asal={asal} setAsal={setAsal} tujuan={tujuan} setTujuan={setTujuan} date={date} setDate={setDate}/>} />
+        <Route path="details" element={<PayTicket ticketDetailsId={ticketDetailsId} setTicketDetailsId={setTicketDetailsId}/>} />
       </Routes>
       {/* <TravelList /> */}
       {/* <PayTicket/> */}

@@ -1,31 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  FaTrophy,
-  FaShoppingBasket,
-  FaToggleOff,
-  FaToggleOn,
-} from "react-icons/fa";
+import { FaTrophy, FaShoppingBasket } from "react-icons/fa";
 import { RiArrowLeftRightFill } from "react-icons/ri";
-// import axios from "axios";
+import axios from "axios";
 
-
-const Beranda = ({token, refreshToken}) => {
+const Beranda = ({allTickets, setAllTickets, token, refreshToken, asal, setAsal, tujuan, setTujuan, date, setDate }) => {
   useEffect(() => {
-    refreshToken()
+    getTickets();
+  }, []);
+  useEffect(() => {
+    refreshToken();
   }, [token]);
-  const navigate = useNavigate()
-  const [isToggle, setIsToggle] = useState(false);
-  const handleToggle = () => {
-    setIsToggle(!isToggle);
-  }; 
 
-  const handleBerandaSubmit = (e) =>{
+  const navigate = useNavigate();
+  // const [isToggle, setIsToggle] = useState(false);
+
+
+  const getTickets = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/tickets");
+      setAllTickets({ Tickets: [...response.data] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const kotaAsal = [
+    ...new Set(
+      allTickets.Tickets?.map((ticket) => {
+        return ticket.kota_asal;
+      })
+    ),
+  ];
+  const kotaTujuan = [
+    ...new Set(
+      allTickets.Tickets?.map((ticket) => {
+        return ticket.kota_tujuan;
+      })
+    ),
+  ];
+
+  // const handleToggle = () => {
+  //   setIsToggle(!isToggle);
+  // };
+
+  const handleBerandaSubmit = (e) => {
     e.preventDefault();
-    navigate("/tickets")
-  }
- 
-  if(token === null) return <h1 className="mt-[100px] text-center">Silahkan Login Terlebih dahulu</h1>
+    navigate("/tickets");
+  };
+
+  if (token === null)
+    return (
+      <h1 className="mt-[100px] text-center">Silahkan Login Terlebih dahulu</h1>
+    );
+
   return (
     <div className="flex flex-col items-center mt-[140px]">
       <div className="p-5 md:p-10 bg-white flex items-center justify-center gap-5 rounded-xl relative flex-wrap m-6 max-w-[80%]">
@@ -64,20 +92,29 @@ const Beranda = ({token, refreshToken}) => {
         </div>
       </div>
       <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
-        <form className="flex flex-col justify-center items-center" onSubmit={handleBerandaSubmit}>
+        <form
+          className="flex flex-col justify-center items-center"
+          onSubmit={handleBerandaSubmit}
+        >
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label htmlFor="asal" className="text-base sm:mb-1">
                 Asal
               </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+              <select
                 name="asal"
-                placeholder="Asal"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={asal}
+                onChange={(e) => setAsal(e.target.value)}
                 required
-              />
+              >
+                <option value="">None</option>
+                {kotaAsal.map((kota, index) => (
+                  <option key={index} value={kota}>{kota}</option>
+                ))}
+              </select>
             </div>
+
             <RiArrowLeftRightFill
               size={35}
               color="#605F5F"
@@ -87,13 +124,18 @@ const Beranda = ({token, refreshToken}) => {
               <label htmlFor="tujuan" className="text-base sm:mb-1">
                 Tujuan
               </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+              <select
                 name="tujuan"
-                placeholder="Tujuan"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={tujuan}
+                onChange={(e) => setTujuan(e.target.value)}
                 required
-              />
+              >
+                <option value="">None</option>
+                {kotaTujuan.map((kota, index) => (
+                  <option key={index} value={kota}>{kota}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
@@ -103,9 +145,10 @@ const Beranda = ({token, refreshToken}) => {
               </label>
               <input
                 className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+                type="date"
                 name="berangkat"
-                placeholder="Tanggal Berangkat"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 required
               />
             </div>

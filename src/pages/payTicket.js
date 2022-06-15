@@ -5,11 +5,12 @@ import { Passenger } from '../components/Passenger'
 import { Title } from '../components/Title'
 import { Button } from '../components/Button'
 import { CardContact } from '../components/CardContact'
+import { Link } from 'react-router-dom'
 
 export const PayTicket = () => {
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-24">
         <div className="w-3/5">
           <Title name={"Detail Perjalanan"} />
           <CardTravel />
@@ -24,7 +25,9 @@ export const PayTicket = () => {
           <CardService />
         </div>
       </div>
-      <Button name="bayar" />
+      <Link to={"/detail-tiket"}>
+        <Button name="bayar" />
+      </Link>
     </div>
   );
 }

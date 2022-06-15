@@ -13,6 +13,12 @@ const Beranda = () => {
   const handleToggle = () => {
     setIsToggle(!isToggle);
   };
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    window.location.href= "/list-tiket";
+  }
+
   return (
     <div className="flex flex-col items-center mt-[140px]">
       <div className="p-5 md:p-10 bg-white flex items-center justify-center gap-5 rounded-xl relative flex-wrap m-6 max-w-[80%]">
@@ -51,7 +57,7 @@ const Beranda = () => {
         </div>
       </div>
       <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
-        <form className="flex flex-col justify-center items-center">
+        <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label htmlFor="asal" className="text-base sm:mb-1">

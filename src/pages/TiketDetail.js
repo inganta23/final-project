@@ -3,7 +3,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 export const TiketDetail = () => {
   return (
-    <div className="flex justify-center mt-24 mb-10">
+    <div className="flex justify-center mt-24 mb-10 mt-24">
       <div className="w-3/5">
         <div className="shadow-lg p-4 rounded-lg bg-white">
           <div className="flex mb-2 items-center">

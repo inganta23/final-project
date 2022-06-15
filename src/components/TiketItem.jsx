@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const TiketItem = () => {
   return (
@@ -46,8 +47,10 @@ const TiketItem = () => {
           </div>
 
           <div className="flex justify-center h-11 font-bold tracking-wide">
-            <button className="w-2/4 font-bold" type="submit">
-              Detail
+              <button className="w-2/4 font-bold" type="button">
+                <Link to="/detail-tiket">
+                    Detail
+                </Link>
             </button>
           </div>
         

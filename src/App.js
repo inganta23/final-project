@@ -13,18 +13,17 @@ import { TiketDetail } from "./pages/TiketDetail";
 function App() {
   return (
     <div className="App">
-      <Navbar /> 
-      {/* <Routes>
-        <Route path="login" element={<Login />}/>
-        <Route path="daftar" element={<Daftar />}/>
-        <Route path="tiket" element={<Tiket />} />
-        <Route path="beranda" element={<Beranda />}/>
-      </Routes>      */}
-      <TiketLogin />
-      <TiketDetail />
-      {/* <div className="mt-24"></div> */}
-      <PayTicket/>
-      <TravelList />
+      <Navbar />
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="daftar" element={<Daftar />} />
+        {/* <Route path="tiket" element={<Tiket />} /> */}
+        <Route path="beranda" element={<Beranda />} />
+        <Route path="list-tiket" element={<TravelList />} />
+        <Route path="beli-tiket" element={<PayTicket />} />
+        <Route path="tiket" element={<TiketLogin />} />
+        <Route path="detail-tiket" element={<TiketDetail />} />
+      </Routes>
     </div>
   );
 }

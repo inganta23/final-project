@@ -35,7 +35,7 @@ export const TravelList = ({allTickets, setAllTickets, setTicketDetailsId, ticke
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-[100px]">
         <div className="w-3/5">
           <div className="flex justify-center">
             <CardDate day={"Kamis"} date={"16"} />

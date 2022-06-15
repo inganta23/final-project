@@ -4,8 +4,8 @@ import Daftar from "./pages/Daftar"
 import Navbar from "./components/Navbar";
 import Tiket from "./pages/Tiket";
 import Beranda from "./pages/Beranda";
-import { PayTicket } from "./pages/PayTicket";
-import { TravelList } from "./pages/TravelList";
+import { PayTicket } from "./pages/payTicket";
+import { TravelList } from "./pages/travelList";
 import TiketLogin from "./pages/TiketLogin";
 import { TiketDetail } from "./pages/TiketDetail";
 

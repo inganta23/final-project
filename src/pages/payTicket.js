@@ -1,10 +1,10 @@
 import React from 'react'
-import { CardTravel } from '../components/CardTravel'
-import { CardService } from '../components/CardService'
-import { Passenger } from '../components/Passenger'
-import { Title } from '../components/Title'
-import { Button } from '../components/Button'
-import { CardContact } from '../components/CardContact'
+import { CardTravel } from '../components/cardTravel'
+import { CardService } from '../components/cardService'
+import { Passenger } from '../components/passenger'
+import { Title } from '../components/title'
+import { Button } from '../components/button'
+import { CardContact } from '../components/cardContact'
 import { Link } from 'react-router-dom'
 
 export const PayTicket = () => {

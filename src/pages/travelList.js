@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { CardDate } from '../components/CardDate'
-import { CardTravel } from '../components/CardTravel'
+import { CardDate } from '../components/cardDate'
+import { CardTravel } from '../components/cardTravel'
 
 export const TravelList = () => {
   return (

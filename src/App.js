@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Daftar from "./pages/Daftar";
 import Navbar from "./components/Navbar";
-import Tiket from "./pages/Tiket";
+import RiwayatTiket from "./pages/RiwayatTiket";
 import Beranda from "./pages/Beranda";
 import { PayTicket } from "./pages/payTicket";
 import { TravelList } from "./pages/travelList";
@@ -42,6 +42,7 @@ function App() {
         <Route path="list-tiket" element={<TravelList tikets={tiket}/>} />
         <Route path="beli-tiket/:id" element={<PayTicket tiket={tiket}/>} />
         <Route path="tiket" element={<TiketLogin />} />
+        <Route path="riwayat" element={<RiwayatTiket />} />
         <Route path="detail-tiket" element={<TiketDetail />} />
       </Routes>
     </div>

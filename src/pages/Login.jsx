@@ -21,9 +21,9 @@ const Login = ({ setIsLoggedIn }) => {
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    login();
+    await login();
     setEmail("");
     setPassword("");
     navigate("/beranda");

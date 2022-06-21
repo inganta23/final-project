@@ -1,8 +1,20 @@
 import React from "react";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { convertMonth } from "../utils/convertDate";
 
-const TiketItem = () => {
+const TiketItem = (
+  {
+    id_tiket_user,
+    kelas_kereta_api,
+    nama_kereta_api,
+    stasiun_berangkat,
+    stasiun_berangkat_inisial,
+    stasiun_tujuan,
+    stasiun_tujuan_inisial,
+    tanggal_berangkat
+}) => {
+  
   return (
        <>
         <div className="shadow-lg p-4 rounded-lg bg-white mb-2">
@@ -15,10 +27,10 @@ const TiketItem = () => {
               />
             </div>
             <div>
-              <h4 className="text-sm xs:text-base sm:text-lg text-midBlue">
-                ARGO PARAHYANGAN
+              <h4 className="text-sm xs:text-base sm:text-lg text-midBlue uppercase">
+                {nama_kereta_api}
               </h4>
-              <p className="text-sm font-light">Ekonomi - 17 Sep 2021</p>
+              <p className="text-sm font-light"><span className="capitalize">{kelas_kereta_api}</span> - {convertMonth(tanggal_berangkat)}</p>
             </div>
           </div>
 
@@ -34,14 +46,14 @@ const TiketItem = () => {
 
           <div className="flex flex-col justify-center items-center mt-5">
             <div className="flex w-[90%] justify-around items-center mb-5">
-              <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">BD</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">BANDUNG</h2>
+              <div className="text-center uppercase">
+                <h2 className="text-orange text-xl lg:text-2xl">{stasiun_berangkat_inisial}</h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl">{stasiun_berangkat}</h2>
               </div>
               <MdOutlineArrowRightAlt className="text-lightGrey text-3xl lg:text-5xl" />
-              <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">GMR</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">GAMBIR</h2>
+              <div className="text-center uppercase">
+                <h2 className="text-orange text-xl lg:text-2xl">{stasiun_tujuan_inisial}</h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl">{stasiun_tujuan}</h2>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaTrophy,
@@ -8,16 +8,22 @@ import {
 } from "react-icons/fa";
 import { RiArrowLeftRightFill } from "react-icons/ri";
 
-const Beranda = () => {
+const Beranda = ({ isLoggedIn, stasiun }) => {
   const [isToggle, setIsToggle] = useState(false);
+  const [asal, setAsal] = useState("");
+  const [date, setDate] = useState({
+    berangkat :'',
+    tiba:''
+  });
+  const [tujuan, setTujuan] = useState("");
   const handleToggle = () => {
     setIsToggle(!isToggle);
   };
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.href= "/list-tiket";
-  }
+    window.location.href = "/list-tiket";
+  };
 
   return (
     <div className="flex flex-col items-center mt-[140px]">
@@ -57,19 +63,29 @@ const Beranda = () => {
         </div>
       </div>
       <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
-        <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col justify-center items-center"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[45%]">
               <label htmlFor="asal" className="text-base sm:mb-1">
                 Asal
               </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+              <select
                 name="asal"
-                placeholder="Asal"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={asal}
+                onChange={(e) => setAsal(e.target.value)}
                 required
-              />
+              >
+                <option value="">None</option>
+                {stasiun?.map((asal, index) => (
+                  <option key={index} value={asal.kota}>
+                    {asal.kota}
+                  </option>
+                ))}
+              </select>
             </div>
             <RiArrowLeftRightFill
               size={35}
@@ -80,13 +96,20 @@ const Beranda = () => {
               <label htmlFor="tujuan" className="text-base sm:mb-1">
                 Tujuan
               </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+              <select
                 name="tujuan"
-                placeholder="Tujuan"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={tujuan}
+                onChange={(e) => setTujuan(e.target.value)}
                 required
-              />
+              >
+                <option value="">None</option>
+                {stasiun?.map((tujuan, index) => (
+                  <option key={index} value={tujuan.kota}>
+                    {tujuan.kota}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
@@ -96,9 +119,13 @@ const Beranda = () => {
               </label>
               <input
                 className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+                type="date"
+                value={date.berangkat}
                 name="berangkat"
                 placeholder="Tanggal Berangkat"
+                onChange={(e) => {
+                  setDate({...date, berangkat: e.target.value})
+                }}
                 required
               />
             </div>
@@ -124,8 +151,12 @@ const Beranda = () => {
               </label>
               <input
                 className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
+                type="date"
+                value={date.tiba}
                 name="kembali"
+                onChange={(e) => {
+                  setDate({...date, tiba: e.target.value})
+                }}
                 placeholder="Tanggal Kembali"
                 required
               />

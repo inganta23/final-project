@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const login = async () => {
+    try {
+      const res = await axios.post("http://localhost:9000/api/v1/login/", {
+        email: email,
+        password: password,
+      });
+      localStorage.setItem("token", res.data.data.token);
+      setIsLoggedIn(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login();
+    setEmail("");
+    setPassword("");
+    navigate("/beranda");
+  };
+
   return (
     <div className="flex justify-center items-center h-[90vh] mt-20">
-      <form className="flex flex-col w-[520px] bg-[#fff] rounded-xl">
+      <form
+        className="flex flex-col w-[520px] bg-[#fff] rounded-xl"
+        onSubmit={handleLogin}
+      >
         <div className="mx-auto">
           <img src={require("../assets/img/image 93.png")} alt="Login" />
         </div>

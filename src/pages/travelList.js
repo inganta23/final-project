@@ -1,9 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { CardDate } from '../components/cardDate'
-import { CardTravel } from '../components/cardTravel'
+import React from "react";
+import { Link } from "react-router-dom";
+import { CardDate } from "../components/cardDate";
+import { CardTravel } from "../components/cardTravel";
 
-export const TravelList = () => {
+export const TravelList = (tikets) => {
+  if(tikets.tikets === '') return <h2 className="text-center mt-[100px]">Tidak ada tiket tersedia</h2>
   return (
     <div>
       <div className="flex justify-center mt-24">
@@ -17,15 +18,14 @@ export const TravelList = () => {
           </div>
 
           <div className="mt-4">
-            <Link to={"/beli-tiket"}>
-              <CardTravel />
-            </Link>
-            <CardTravel />
-            <CardTravel />
-            <CardTravel />
+            {tikets.tikets?.map((tiket, index) => (
+              <Link key={index} to={`/beli-tiket/${index}`}>
+                <CardTravel tiket={tiket}/>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   FaTrophy,
   FaShoppingBasket,
@@ -7,22 +8,30 @@ import {
   FaToggleOn,
 } from "react-icons/fa";
 import { RiArrowLeftRightFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
-const Beranda = ({ isLoggedIn, stasiun }) => {
-  const [isToggle, setIsToggle] = useState(false);
+const Beranda = ({ setTiket, stasiun }) => {
+  const navigate = useNavigate();
   const [asal, setAsal] = useState("");
-  const [date, setDate] = useState({
-    berangkat :'',
-    tiba:''
-  });
+  const [date, setDate] = useState("");
+  const [kelas, setKelas] = useState("");
   const [tujuan, setTujuan] = useState("");
-  const handleToggle = () => {
-    setIsToggle(!isToggle);
-  };
 
-  const handleSubmit = (e) => {
+  const getTiket = async (newDate) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:9000/api/v1/tiket?tgl_berangkat=${newDate}&stasiun_berangkat=${asal}&stasiun_tujuan=${tujuan}&kelas=${kelas}`
+      );
+      setTiket(res.data.data)
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const handleTiketSubmit = (e) => {
     e.preventDefault();
-    window.location.href = "/list-tiket";
+    const newDate = date.split("-").reverse().join("-");
+    getTiket(newDate);
+    navigate("/list-tiket");
   };
 
   return (
@@ -65,7 +74,7 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
       <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
         <form
           className="flex flex-col justify-center items-center"
-          onSubmit={handleSubmit}
+          onSubmit={handleTiketSubmit}
         >
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[45%]">
@@ -81,8 +90,8 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
               >
                 <option value="">None</option>
                 {stasiun?.map((asal, index) => (
-                  <option key={index} value={asal.kota}>
-                    {asal.kota}
+                  <option key={index} value={asal.nama}>
+                    {asal.nama}
                   </option>
                 ))}
               </select>
@@ -105,8 +114,8 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
               >
                 <option value="">None</option>
                 {stasiun?.map((tujuan, index) => (
-                  <option key={index} value={tujuan.kota}>
-                    {tujuan.kota}
+                  <option key={index} value={tujuan.nama}>
+                    {tujuan.nama}
                   </option>
                 ))}
               </select>
@@ -120,16 +129,16 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
               <input
                 className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
                 type="date"
-                value={date.berangkat}
+                value={date}
                 name="berangkat"
                 placeholder="Tanggal Berangkat"
                 onChange={(e) => {
-                  setDate({...date, berangkat: e.target.value})
+                  setDate(e.target.value);
                 }}
                 required
               />
             </div>
-            {isToggle ? (
+            {/* {isToggle ? (
               <FaToggleOn
                 size={35}
                 color="#605F5F"
@@ -160,20 +169,24 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
                 placeholder="Tanggal Kembali"
                 required
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[50%]">
               <label htmlFor="kereta" className="text-base sm:mb-1">
                 Kelas Kereta
               </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="text"
-                name="kereta"
-                placeholder="Kereta"
+              <select
+                name="kelas"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={kelas}
+                onChange={(e) => setKelas(e.target.value)}
                 required
-              />
+              >
+                <option value="">None</option>
+                <option value="ekonomi">Ekonomi</option>
+                <option value="bisnis">Bisnis</option>
+              </select>
             </div>
             <div className="flex flex-col w-full sm:w-[50%]">
               <label htmlFor="penumpang" className="text-base sm:mb-1">
@@ -181,17 +194,9 @@ const Beranda = ({ isLoggedIn, stasiun }) => {
               </label>
               <div className="flex gap-5">
                 <input
-                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-[50%]"
+                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
                   type="text"
                   name="penumpang"
-                  placeholder="Dewasa"
-                  required
-                />
-                <input
-                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-[50%]"
-                  type="text"
-                  name="penumpang"
-                  placeholder="Bayi"
                   required
                 />
               </div>

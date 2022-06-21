@@ -14,6 +14,7 @@ import axios from "axios";
 function App() {
   const [stasiun, setStasiun] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [tiket, setTiket] = useState('');
   const getStasiun = async () => {
     try {
       const res = await axios.get("http://localhost:9000/api/v1/stasiun/");
@@ -37,9 +38,9 @@ function App() {
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="daftar" element={<Daftar />} />
         {/* <Route path="tiket" element={<Tiket />} /> */}
-        <Route path="beranda" element={<Beranda isLoggedIn={isLoggedIn} stasiun={stasiun}/>} />
-        <Route path="list-tiket" element={<TravelList />} />
-        <Route path="beli-tiket" element={<PayTicket />} />
+        <Route path="beranda" element={<Beranda setTiket={setTiket} stasiun={stasiun}/>} />
+        <Route path="list-tiket" element={<TravelList tikets={tiket}/>} />
+        <Route path="beli-tiket/:id" element={<PayTicket tiket={tiket}/>} />
         <Route path="tiket" element={<TiketLogin />} />
         <Route path="detail-tiket" element={<TiketDetail />} />
       </Routes>

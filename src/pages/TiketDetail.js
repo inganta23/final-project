@@ -1,7 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { useParams } from 'react-router-dom';
+import { axiosGet } from '../api/instanceAxios';
+import { convertMonth } from '../utils/convertDate';
+import { convertToRupiah } from '../utils/convertToRupiah';
 
 export const TiketDetail = () => {
+
+  const [tiket, setTiket]     = useState({});
+  const [nikList, setNikList] = useState([]);
+  const { tiketUserId }       = useParams();
+
+  useEffect(() => {
+
+      const getTiketById = async () => {
+        const token    = localStorage.getItem("token");
+        const { data } = await axiosGet(`/tiket-user/${tiketUserId}?status=aktif`, token);
+        setTiket(data.data);
+
+        const {total_penumpang, user_nik} = data.data;
+        const nikList = [];
+        for (let i = 0; i < total_penumpang; i++) {
+              nikList.push(user_nik);  
+        }
+        setNikList(nikList);
+      };
+      getTiketById();
+
+  }, []);
+
   return (
     <div className="flex justify-center mt-24 mb-10 mt-24">
       <div className="w-3/5">
@@ -15,10 +42,15 @@ export const TiketDetail = () => {
               />
             </div>
             <div>
-              <h4 className="text-sm xs:text-base sm:text-lg text-midBlue">
-                ARGO PARAHYANGAN
+              <h4 className="text-sm xs:text-base sm:text-lg text-midBlue uppercase">
+                {tiket?.nama_kereta_api}
               </h4>
-              <p className="text-sm font-light">Ekonomi</p>
+              <p className="text-sm font-light capitalize">
+                {tiket?.kelas_kereta_api}
+              </p>
+            </div>
+            <div className="text-right flex-1 capitalize mr-6">
+              status : <span className="font-semibold"> {tiket?.status}</span>
             </div>
           </div>
 
@@ -34,14 +66,22 @@ export const TiketDetail = () => {
 
           <div className="flex flex-col justify-center items-center mt-5">
             <div className="flex w-[90%] justify-around items-center mb-5">
-              <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">BD</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">BANDUNG</h2>
+              <div className="text-center uppercase">
+                <h2 className="text-orange text-xl lg:text-2xl">
+                  {tiket?.stasiun_berangkat_inisial}
+                </h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl">
+                  {tiket?.stasiun_berangkat}
+                </h2>
               </div>
               <MdOutlineArrowRightAlt className="text-lightGrey text-3xl lg:text-5xl" />
-              <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">GMR</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">GAMBIR</h2>
+              <div className="text-center uppercase">
+                <h2 className="text-orange text-xl lg:text-2xl">
+                  {tiket?.stasiun_tujuan_inisial}
+                </h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl">
+                  {tiket?.stasiun_tujuan}
+                </h2>
               </div>
             </div>
           </div>
@@ -52,27 +92,40 @@ export const TiketDetail = () => {
               <p className="capitalize font-bold">Ari Cahyono</p>
             </div>
 
-            <div className="flex text-carbonGrey mt-4">
+            <div className="flex text-carbonGrey">
               <div className="flex-1">
-                <p>No. Identitas</p>
-                <p className="font-bold">35782723812381031</p>
+                 <p className="mt-4">No. Identitas</p>
               </div>
               <div className="flex-1 text-right">
                 <p>Kursi</p>
-                <p className="font-bold">PRE-2 / 1D</p>
               </div>
             </div>
+            {nikList?.map((nik, i) => {
+              const kursi = 1 + i;
+              return (
+                <div className="flex text-carbonGrey">
+                  <div className="flex-1">
+                    <p className="font-bold">{nik}</p>
+                  </div>
+                  <div className="flex-1 text-right">
+                    <p className="font-bold">PRE-2 / {kursi}D</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           {/* Departure  */}
           <div className="border-t-2 border-lightGrey p-3">
             <div className="flex text-carbonGrey">
               <div className="flex-1">
                 <p>Tgl Berangkat</p>
-                <p className="font-bold">17 september 2021</p>
+                <p className="font-bold">
+                  {convertMonth(tiket?.tanggal_berangkat)}
+                </p>
               </div>
               <div className="flex-1 text-right">
                 <p>Jam Berangkat </p>
-                <p className="font-bold">06:00</p>
+                <p className="font-bold">{tiket?.waktu_berangkat}</p>
               </div>
             </div>
           </div>
@@ -81,18 +134,20 @@ export const TiketDetail = () => {
             <div className="flex text-carbonGrey">
               <div className="flex-1">
                 <p>Tgl Tiba</p>
-                <p className="font-bold">17 september 2021</p>
+                <p className="font-bold">{convertMonth(tiket?.tanggal_tiba)}</p>
               </div>
               <div className="flex-1 text-right">
                 <p>Jam Tiba </p>
-                <p className="font-bold">09:23</p>
+                <p className="font-bold">{tiket?.waktu_tiba}</p>
               </div>
             </div>
           </div>
           {/* Price */}
           <div className="border-t-2 border-lightGrey p-3 text-lg text-carbonGrey">
             <p className="inline-block mr-24">Harga</p>
-            <p className="inline-block font-bold">Rp 90.000</p>
+            <p className="inline-block font-bold">
+              {convertToRupiah(tiket?.total_harga)}
+            </p>
           </div>
         </div>
       </div>

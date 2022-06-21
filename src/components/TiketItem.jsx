@@ -60,7 +60,7 @@ const TiketItem = (
 
           <div className="flex justify-center h-11 font-bold tracking-wide">
               <button className="w-2/4 font-bold" type="button">
-                <Link to="/detail-tiket">
+                <Link to={`/detail-tiket/${id_tiket_user}`}>
                     Detail
                 </Link>
             </button>

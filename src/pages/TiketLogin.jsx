@@ -8,7 +8,7 @@ const TiketLogin = () => {
 
   useEffect(() => {
     const getTiket = async() => {
-      const token    = await localStorage.getItem("token")
+      const token    = localStorage.getItem("token")
       const { data } = await axiosGet("/tiket-user?status=aktif", token );
       setTiketList(data.data);
     }

@@ -1,4 +1,6 @@
 export const convertMonth = (dateString) => {
+    if (!dateString) return null;
+
     const getDate  = dateString.substring(0, 2);
     const getMonth = dateString.substring(3, 5);
     const getYear  = dateString.substring(6, 11);

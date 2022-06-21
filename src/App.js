@@ -43,7 +43,7 @@ function App() {
         <Route path="beli-tiket/:id" element={<PayTicket tiket={tiket}/>} />
         <Route path="tiket" element={<TiketLogin />} />
         <Route path="riwayat" element={<RiwayatTiket />} />
-        <Route path="detail-tiket" element={<TiketDetail />} />
+      <Route path="detail-tiket/:tiketUserId" element={<TiketDetail />} />
       </Routes>
     </div>
   );

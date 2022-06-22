@@ -2,24 +2,38 @@ import React, {useEffect} from "react";
 import TiketItem from "../components/TiketItem";
 import {axiosGet} from "../api/instanceAxios";
 import { useState } from "react";
+import Tiket from "./Tiket";
 
 const TiketLogin = () => {
   const [tiketList, setTiketList] = useState([]);
+  const [isToken, setIsToken] = useState(false);
 
   useEffect(() => {
+    setIsToken(localStorage.getItem("token") !== null );
+  }, []);
+
+  useEffect(() => {
+    const token      = localStorage.getItem("token")
     const getTiket = async() => {
-      const token    = localStorage.getItem("token")
-      const { data } = await axiosGet("/tiket-user?status=aktif", token );
-      setTiketList(data.data);
+        const { data } = await axiosGet("/tiket-user?status=aktif", token );
+        setTiketList(data.data);
     }
-    getTiket();
-  }, [])
-  
+    token && getTiket();
+  }, []);
+
    return (
     <div className="flex justify-center mt-24 mb-10">
+     {!isToken && 
+        <div className="w-full">
+          <Tiket />
+        </div>
+      }
+
+      {isToken &&  
       <div className="w-3/5">
         {tiketList?.map((tiket)=>(<TiketItem key={tiket.id_tiket_user} {...tiket} />))}
       </div>
+      }
     </div>
   );
 };

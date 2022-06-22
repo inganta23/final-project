@@ -4,9 +4,10 @@ import Daftar from "./pages/Daftar";
 import Navbar from "./components/Navbar";
 import RiwayatTiket from "./pages/RiwayatTiket";
 import Beranda from "./pages/Beranda";
-import { PayTicket } from "./pages/payTicket";
-import { TravelList } from "./pages/travelList";
+import { PayTicket } from "./pages/PayTicket";
+import { TravelList } from "./pages/TravelList";
 import TiketLogin from "./pages/TiketLogin";
+import Tiket from "./pages/Tiket";
 import { TiketDetail } from "./pages/TiketDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -37,7 +38,7 @@ function App() {
       <Routes>
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="daftar" element={<Daftar />} />
-        {/* <Route path="tiket" element={<Tiket />} /> */}
+        <Route path="tiketd" element={<Tiket  />} />
         <Route path="beranda" element={<Beranda setTiket={setTiket} stasiun={stasiun}/>} />
         <Route path="list-tiket" element={<TravelList tikets={tiket}/>} />
         <Route path="beli-tiket/:id" element={<PayTicket tiket={tiket}/>} />

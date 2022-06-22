@@ -1,9 +1,9 @@
 import React from 'react'
 import { CardTravel } from '../components/CardTravel'
-import { CardContact } from '../components/cardContact'
+import { CardContact } from '../components/CardContact'
 import { Title } from '../components/title'
-import { InputPassenger } from '../components/inputPassenger'
-import { Button } from '../components/button'
+import { InputPassenger } from '../components/InputPassenger'
+import { Button } from '../components/Button'
 
 export const TravelDetails = () => {
   return (

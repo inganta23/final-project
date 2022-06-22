@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CardDate } from "../components/cardDate";
-import { CardTravel } from "../components/cardTravel";
+import { CardDate } from "../components/CardDate";
+import { CardTravel } from "../components/CardTravel";
 
 export const TravelList = (tikets) => {
   if(tikets.tikets === '') return <h2 className="text-center mt-[100px]">Tidak ada tiket tersedia</h2>

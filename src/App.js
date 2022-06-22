@@ -4,18 +4,21 @@ import Daftar from "./pages/Daftar";
 import Navbar from "./components/Navbar";
 import RiwayatTiket from "./pages/RiwayatTiket";
 import Beranda from "./pages/Beranda";
-import { PayTicket } from "./pages/PayTicket";
-import { TravelList } from "./pages/TravelList";
+import { PayTicket } from "./pages/payTicket";
+import { TravelList } from "./pages/travelList";
 import TiketLogin from "./pages/TiketLogin";
 import Tiket from "./pages/Tiket";
 import { TiketDetail } from "./pages/TiketDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import Logout from "./components/Logout";
 
 function App() {
   const [stasiun, setStasiun] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [tiket, setTiket] = useState('');
+  const [tiket, setTiket] = useState("");
+  const [dataUser, setDataUser] = useState({ nama: "", email: "", nik: "" });
   const getStasiun = async () => {
     try {
       const res = await axios.get("http://localhost:9000/api/v1/stasiun/");
@@ -24,7 +27,20 @@ function App() {
       console.error(err);
     }
   };
-  
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const data = jwtDecode(localStorage.getItem("token")).data;
+      setDataUser({
+        nama: data.username,
+        email: data.email,
+        nik: data.nik,
+      });
+    }else{
+      setDataUser({ nama: "", email: "", nik: "" });
+    }
+  }, [isLoggedIn]);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
@@ -32,19 +48,32 @@ function App() {
     getStasiun();
   }, []);
 
+
   return (
     <div className="App">
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} dataUser={dataUser}/>
       <Routes>
-        <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route index element={isLoggedIn ? <Logout setIsLoggedIn={setIsLoggedIn} dataUser={dataUser}/> : <Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="daftar" element={<Daftar />} />
-        <Route path="tiketd" element={<Tiket  />} />
-        <Route path="beranda" element={<Beranda setTiket={setTiket} stasiun={stasiun}/>} />
-        <Route path="list-tiket" element={<TravelList tikets={tiket}/>} />
-        <Route path="beli-tiket/:id" element={<PayTicket tiket={tiket}/>} />
+        <Route path="tiketd" element={<Tiket />} />
+        <Route
+          path="beranda"
+          element={<Beranda setTiket={setTiket} stasiun={stasiun} />}
+        />
+        <Route path="list-tiket" element={<TravelList tikets={tiket} />} />
+        <Route
+          path="beli-tiket/:id"
+          element={
+            <PayTicket
+              tiket={tiket}
+              dataUser={dataUser}
+              setDataUser={setDataUser}
+            />
+          }
+        />
         <Route path="tiket" element={<TiketLogin />} />
         <Route path="riwayat" element={<RiwayatTiket />} />
-      <Route path="detail-tiket/:tiketUserId" element={<TiketDetail />} />
+        <Route path="detail-tiket/:tiketUserId" element={<TiketDetail />} />
       </Routes>
     </div>
   );

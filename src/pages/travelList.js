@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { CardDate } from "../components/CardDate";
-import { CardTravel } from "../components/CardTravel";
+import { Link, useNavigate } from "react-router-dom";
+import { CardDate } from "../components/cardDate";
+import { CardTravel } from "../components/cardTravel";
 
 export const TravelList = (tikets) => {
-  if(tikets.tikets === '') return <h2 className="text-center mt-[100px]">Tidak ada tiket tersedia</h2>
+  const navigate = useNavigate();
+  const handleClickTiket = (index) => {
+    if (localStorage.getItem("token")) navigate(`/beli-tiket/${index}`);
+    else alert("Silahkan Login Dahulu");
+  };
+  if (tikets.tikets === "")
+    return <h2 className="text-center mt-[100px]">Tidak ada tiket tersedia</h2>;
   return (
     <div>
       <div className="flex justify-center mt-24">
@@ -19,9 +25,9 @@ export const TravelList = (tikets) => {
 
           <div className="mt-4">
             {tikets.tikets?.map((tiket, index) => (
-              <Link key={index} to={`/beli-tiket/${index}`}>
-                <CardTravel tiket={tiket}/>
-              </Link>
+              <div key={index} onClick={() => handleClickTiket(index)}>
+                <CardTravel tiket={tiket} />
+              </div>
             ))}
           </div>
         </div>

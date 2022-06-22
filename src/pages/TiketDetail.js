@@ -1,7 +1,11 @@
 import React from 'react'
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { useParams } from 'react-router-dom';
 
-export const TiketDetail = () => {
+
+export const TiketDetail = ({tiket, dataUser}) => {
+  const {id} = useParams();
+  console.log(tiket)
   return (
     <div className="flex justify-center mt-24 mb-10 mt-24">
       <div className="w-3/5">
@@ -16,9 +20,9 @@ export const TiketDetail = () => {
             </div>
             <div>
               <h4 className="text-sm xs:text-base sm:text-lg text-midBlue">
-                ARGO PARAHYANGAN
+                {tiket[id].nama_kereta_api}
               </h4>
-              <p className="text-sm font-light">Ekonomi</p>
+              <p className="text-sm font-light"> {tiket[id].kelas_kereta_api}</p>
             </div>
           </div>
 
@@ -35,27 +39,27 @@ export const TiketDetail = () => {
           <div className="flex flex-col justify-center items-center mt-5">
             <div className="flex w-[90%] justify-around items-center mb-5">
               <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">BD</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">BANDUNG</h2>
+                <h2 className="text-orange text-xl lg:text-2xl uppercase"> {tiket[id].stasiun_berangkat_inisial}</h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl uppercase">{tiket[id].stasiun_berangkat}</h2>
               </div>
               <MdOutlineArrowRightAlt className="text-lightGrey text-3xl lg:text-5xl" />
               <div className="text-center">
-                <h2 className="text-orange text-xl lg:text-2xl">GMR</h2>
-                <h2 className="text-carbonGrey text-xl lg:text-2xl">GAMBIR</h2>
+                <h2 className="text-orange text-xl lg:text-2xl uppercase">{tiket[id].stasiun_tujuan_inisial}</h2>
+                <h2 className="text-carbonGrey text-xl lg:text-2xl uppercase">{tiket[id].stasiun_tujuan}</h2>
               </div>
             </div>
           </div>
 
           <div className="border-t-2 border-lightGrey p-3">
             <div className="text-carbonGrey ">
-              <p className="capitalize">penumpang dewasa</p>
-              <p className="capitalize font-bold">Ari Cahyono</p>
+              <p className="capitalize">penumpang</p>
+              <p className="capitalize font-bold">{dataUser.nama}</p>
             </div>
 
             <div className="flex text-carbonGrey mt-4">
               <div className="flex-1">
                 <p>No. Identitas</p>
-                <p className="font-bold">35782723812381031</p>
+                <p className="font-bold">{dataUser.nik}</p>
               </div>
               <div className="flex-1 text-right">
                 <p>Kursi</p>
@@ -68,11 +72,11 @@ export const TiketDetail = () => {
             <div className="flex text-carbonGrey">
               <div className="flex-1">
                 <p>Tgl Berangkat</p>
-                <p className="font-bold">17 september 2021</p>
+                <p className="font-bold">{tiket[id].tanggal_berangkat}</p>
               </div>
               <div className="flex-1 text-right">
                 <p>Jam Berangkat </p>
-                <p className="font-bold">06:00</p>
+                <p className="font-bold">{tiket[id].waktu_berangkat}</p>
               </div>
             </div>
           </div>
@@ -81,18 +85,18 @@ export const TiketDetail = () => {
             <div className="flex text-carbonGrey">
               <div className="flex-1">
                 <p>Tgl Tiba</p>
-                <p className="font-bold">17 september 2021</p>
+                <p className="font-bold">{tiket[id].tanggal_tiba}</p>
               </div>
               <div className="flex-1 text-right">
                 <p>Jam Tiba </p>
-                <p className="font-bold">09:23</p>
+                <p className="font-bold">{tiket[id].waktu_tiba}</p>
               </div>
             </div>
           </div>
           {/* Price */}
           <div className="border-t-2 border-lightGrey p-3 text-lg text-carbonGrey">
             <p className="inline-block mr-24">Harga</p>
-            <p className="inline-block font-bold">Rp 90.000</p>
+            <p className="inline-block font-bold">Rp {tiket[id].harga_tiket}</p>
           </div>
         </div>
       </div>

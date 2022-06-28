@@ -29,6 +29,7 @@ export const TiketDetail = () => {
 
   }, []);
 
+  console.log(tiket)
   return (
     <div className="flex justify-center mt-24 mb-10 mt-24">
       <div className="w-3/5">

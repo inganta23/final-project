@@ -18,9 +18,6 @@ const Logout = ({dataUser, setIsLoggedIn}) => {
                 <p className='text-2xl'>Alamat Email</p>
                 <p className='text-2xl'>{dataUser.email}</p>
             </div>
-            <div className='flex justify-end border-b-2 border-b-slate-400 py-4'>
-                <p className='text-2xl flex items-center' >Ganti Kata Sandi<span className='ml-5'><FaChevronRight size={30} /></span></p>
-            </div>
             <div className='flex justify-end py-4'>
                 <p className='text-2xl flex items-center cursor-pointer' onClick={handleLogout}>Keluar<span className='ml-5'><FaSignOutAlt size={30}/></span></p>
             </div>

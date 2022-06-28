@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 const Daftar = () => {
   const navigate = useNavigate();
@@ -28,7 +29,21 @@ const Daftar = () => {
   const handleDaftar = (e) => {
     e.preventDefault();
     konfirmasi === password ? setValidasi(false) : setValidasi(true);
-    register();
+    swal({
+      title: "Apakah data anda sudah benar?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((benar) => {
+      if (benar) {
+        register();
+        swal("Terimakasih telah mendaftar", {
+          icon: "success",
+        });
+      } 
+    });
+    
     setNama('');
     setNik('');
     setEmail('');

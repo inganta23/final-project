@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {
@@ -16,6 +16,7 @@ const Beranda = ({ setTiket, stasiun }) => {
   const [date, setDate] = useState("");
   const [kelas, setKelas] = useState("");
   const [tujuan, setTujuan] = useState("");
+  const [penumpang, setPenumpang] = useState(0);
 
   const getTiket = async (newDate) => {
     try {
@@ -33,6 +34,10 @@ const Beranda = ({ setTiket, stasiun }) => {
     getTiket(newDate);
     navigate("/list-tiket");
   };
+
+  useEffect(() => {
+    localStorage.setItem('penumpang',penumpang)
+  },[penumpang])
 
   return (
     <div className="flex flex-col items-center mt-[140px]">
@@ -138,38 +143,7 @@ const Beranda = ({ setTiket, stasiun }) => {
                 required
               />
             </div>
-            {/* {isToggle ? (
-              <FaToggleOn
-                size={35}
-                color="#605F5F"
-                className="sm:mt-[20px] cursor-pointer"
-                onClick={handleToggle}
-              />
-            ) : (
-              <FaToggleOff
-                size={35}
-                color="#605F5F"
-                className="sm:mt-[20px] cursor-pointer"
-                onClick={handleToggle}
-              />
-            )}
-
-            <div className="flex flex-col w-full sm:w-[45%]">
-              <label htmlFor="tujuan" className="text-base sm:mb-1">
-                Tanggal Kembali
-              </label>
-              <input
-                className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                type="date"
-                value={date.tiba}
-                name="kembali"
-                onChange={(e) => {
-                  setDate({...date, tiba: e.target.value})
-                }}
-                placeholder="Tanggal Kembali"
-                required
-              />
-            </div> */}
+            
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 mb-10 justify-between w-full">
             <div className="flex flex-col w-full sm:w-[50%]">
@@ -195,7 +169,9 @@ const Beranda = ({ setTiket, stasiun }) => {
               <div className="flex gap-5">
                 <input
                   className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                  type="text"
+                  value={penumpang}
+                  onChange={(e) => setPenumpang(e.target.value)}
+                  type="number"
                   name="penumpang"
                   required
                 />

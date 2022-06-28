@@ -11,6 +11,8 @@ export const TravelList = (tikets) => {
   };
   if (tikets.tikets === "")
     return <h2 className="text-center mt-[100px]">Tidak ada tiket tersedia</h2>;
+
+
   return (
     <div>
       <div className="flex justify-center mt-24">

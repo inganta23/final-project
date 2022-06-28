@@ -48,7 +48,6 @@ function App() {
     getStasiun();
   }, []);
 
-
   return (
     <div className="App">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} dataUser={dataUser}/>

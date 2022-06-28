@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardTravel } from '../components/cardTravel'
 import { CardService } from '../components/cardService'
 import { Passenger } from '../components/passenger'
@@ -6,10 +6,60 @@ import { Title } from '../components/title'
 import { Button } from '../components/button'
 import { CardContact } from '../components/cardContact'
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import swal from 'sweetalert'
 
 export const PayTicket = ({tiket, dataUser}) => {
-
+  const navigate = useNavigate();
   const {id} = useParams();
+  const [detail, setDetail] = useState();
+
+  const bayar = async(tiket) =>{
+    try {
+      const res = await axios.post("http://localhost:9000/api/v1/tiket-user", {
+        tiket_id: tiket.id_tiket,
+        total_harga: localStorage.getItem('penumpang')*tiket.harga_tiket,
+        total_penumpang: localStorage.getItem('penumpang')
+      },
+      {
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+     
+      setDetail(res);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const handleBayar = (tiket) => {
+    swal({
+      title: "Apakah anda yakin?",
+      text: "Tiket yang sudah dibeli tidak dapat dikembalikan!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willBuy) => {
+      if (willBuy) {
+        bayar(tiket)
+        swal("Anda telah membeli tiket", {
+          icon: "success",
+        });
+      } 
+    });
+    
+  }
+
+
+  useEffect(()=>{
+    if(detail?.data?.data?.id){
+      navigate(`/detail-tiket/${detail.data.data.id}`)
+    }
+  },[detail])
+  
   return (
     <div>
       <div className="flex justify-center mt-24">
@@ -21,15 +71,15 @@ export const PayTicket = ({tiket, dataUser}) => {
           <Title name={"Detail Harga"} className="mt-4" />
           <div className="shadow-lg p-4 rounded-lg bg-white flex justify-between">
             <div className="font-bold">Total Harga </div>
-            <div className="font-bold text-midBlue">Rp {tiket[id].harga_tiket}</div>
+            <div className="font-bold text-midBlue">Rp {tiket[id].harga_tiket * localStorage.getItem('penumpang')}</div>
           </div>
           <Title name={"Layanan"} className="mt-4" />
           <CardService />
         </div>
       </div>
-      <Link to="/detail-tiket">
-        <Button name="bayar" />
-      </Link>
+     
+      <Button name="bayar" handleOnClick={()=>handleBayar(tiket[id])}/>
+     
     </div>
   );
 }

@@ -20,7 +20,14 @@ const Daftar = () => {
         nik: nik,
         password: password
       });
-      console.log(res);
+
+        setNama('');
+        setNik('');
+        setEmail('');
+        setPassword('');
+        setKonfirmasi('');
+        setValidasi(false);
+        navigate('/');
     } catch (err) {
       console.error(err);
     }
@@ -44,13 +51,7 @@ const Daftar = () => {
       } 
     });
     
-    setNama('');
-    setNik('');
-    setEmail('');
-    setPassword('');
-    setKonfirmasi('');
-    setValidasi(false);
-    navigate('/login');
+   
   };
   return (
     <div className="flex justify-center items-center h-[90vh] mt-[90px] mb-20">

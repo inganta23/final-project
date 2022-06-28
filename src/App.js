@@ -18,6 +18,7 @@ function App() {
   const [stasiun, setStasiun] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tiket, setTiket] = useState("");
+  const [tglBerangkat, setTglBerangkat] = useState("")
   const [dataUser, setDataUser] = useState({ nama: "", email: "", nik: "" });
   const getStasiun = async () => {
     try {
@@ -48,19 +49,40 @@ function App() {
     getStasiun();
   }, []);
 
-
   return (
     <div className="App">
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} dataUser={dataUser}/>
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        dataUser={dataUser}
+      />
       <Routes>
-        <Route index element={isLoggedIn ? <Logout setIsLoggedIn={setIsLoggedIn} dataUser={dataUser}/> : <Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route
+          index
+          element={
+            isLoggedIn ? (
+              <Logout setIsLoggedIn={setIsLoggedIn} dataUser={dataUser} />
+            ) : (
+              <Login setIsLoggedIn={setIsLoggedIn} />
+            )
+          }
+        />
         <Route path="daftar" element={<Daftar />} />
         <Route path="tiketd" element={<Tiket />} />
         <Route
           path="beranda"
-          element={<Beranda setTiket={setTiket} stasiun={stasiun} />}
+          element={
+            <Beranda
+              setTiket={setTiket}
+              stasiun={stasiun}
+              setTglBerangkat={setTglBerangkat}
+            />
+          }
         />
-        <Route path="list-tiket" element={<TravelList tikets={tiket} />} />
+        <Route
+          path="list-tiket"
+          element={<TravelList tikets={tiket} setTiketGlobal={setTiket} tglBerangkat={tglBerangkat} />}
+        />
         <Route
           path="beli-tiket/:id"
           element={

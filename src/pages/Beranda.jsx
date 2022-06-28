@@ -10,7 +10,7 @@ import {
 import { RiArrowLeftRightFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-const Beranda = ({ setTiket, stasiun }) => {
+const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
   const navigate = useNavigate();
   const [asal, setAsal] = useState("");
   const [date, setDate] = useState("");
@@ -23,6 +23,7 @@ const Beranda = ({ setTiket, stasiun }) => {
         `http://localhost:9000/api/v1/tiket?tgl_berangkat=${newDate}&stasiun_berangkat=${asal}&stasiun_tujuan=${tujuan}&kelas=${kelas}`
       );
       setTiket(res.data.data)
+      setTglBerangkat(newDate);
     } catch (err) {
       console.error(err);
     }

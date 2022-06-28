@@ -1,9 +1,9 @@
 import React from 'react'
-import { CardTravel } from '../components/cardTravel'
-import { CardService } from '../components/cardService'
+import { CardTravel } from '../components/CardTravel'
+import { CardService } from '../components/CardService'
 import { Passenger } from '../components/passenger'
 import { Title } from '../components/title'
-import { Button } from '../components/button'
+import { Button } from '../components/Button'
 import { CardContact } from '../components/cardContact'
 import { Link, useParams } from 'react-router-dom'
 

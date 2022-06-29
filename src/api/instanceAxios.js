@@ -13,5 +13,12 @@ export const axiosGet = async (url, token) => {
       },
     });
 }
+export const axiosPostWithToken = async (url, data,  token) => {
+   return await instanceAxios.post(url, data, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+}
 
 

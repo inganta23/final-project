@@ -33,7 +33,7 @@ function App() {
     if (localStorage.getItem("token")) {
       const data = jwtDecode(localStorage.getItem("token")).data;
       setDataUser({
-        nama: data.username,
+        nama: data.nama_lengkap,
         email: data.email,
         nik: data.nik,
       });

@@ -7,6 +7,7 @@ const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoginMsg, setIsLoginMsg] = useState(false)
 
   const login = async () => {
     try {
@@ -14,10 +15,17 @@ const Login = ({ setIsLoggedIn }) => {
         email: email,
         password: password,
       });
-      localStorage.setItem("token", res.data.data.token);
-      setIsLoggedIn(true);
+      if(res.data.message !== "login gagal"){
+        localStorage.setItem("token", res.data.data.token);
+        setIsLoggedIn(true);
+        navigate("/beranda");
+        setIsLoginMsg(false);
+      }else{
+        setIsLoginMsg(true);
+      }
     } catch (err) {
       console.error(err);
+      setIsLoginMsg(true);
     }
   };
 
@@ -26,7 +34,6 @@ const Login = ({ setIsLoggedIn }) => {
     await login();
     setEmail("");
     setPassword("");
-    navigate("/beranda");
   };
 
   return (
@@ -40,6 +47,7 @@ const Login = ({ setIsLoggedIn }) => {
         </div>
         <div className="w-[356px] mx-auto flex flex-col">
           <h2 className="text-center text-[#605F5F] mb-7">Login Akun</h2>
+          {isLoginMsg && <span className="text-red-500 text-center text-lg mb-2">Login Gagal</span>}
           <label htmlFor="email" className="mb-3">
             Email
           </label>
@@ -49,7 +57,6 @@ const Login = ({ setIsLoggedIn }) => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
           <label htmlFor="password" className="mb-3">
             Password
@@ -60,7 +67,6 @@ const Login = ({ setIsLoggedIn }) => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
           <small className="text-right text-[#1B69B3] text-base mb-8">
             lupa kata sandi?

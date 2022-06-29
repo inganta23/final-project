@@ -4,55 +4,95 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const Daftar = () => {
-  const navigate = useNavigate();
   const [nama, setNama] = useState("");
-  const [nik, setNik] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [konfirmasi, setKonfirmasi] = useState("");
+  const [nik2, setNik2] = useState("");
+  const [email2, setEmail2] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [konfirmasi2, setKonfirmasi2] = useState("");
   const [validasi, setValidasi] = useState(false);
+  const navigate = useNavigate();
+
+  const [errMsg, setErrMsg] = useState({
+    nama_lengkap : "",
+    email        : "",
+    nik          : "",
+    password     : "",
+    konfirmasi_password : "",
+  });
 
   const register = async () => {
     try {
       const res = await axios.post("http://localhost:9000/api/v1/register/", {
         nama_lengkap: nama,
-        email: email,
-        nik: nik,
-        password: password
+        email: email2,
+        nik: nik2,
+        password: password2
       });
 
         setNama('');
-        setNik('');
-        setEmail('');
-        setPassword('');
-        setKonfirmasi('');
+        setNik2('');
+        setEmail2('');
+        setPassword2('');
+        setKonfirmasi2('');
         setValidasi(false);
         navigate('/');
     } catch (err) {
       console.error(err);
     }
   };
-
   const handleDaftar = (e) => {
     e.preventDefault();
-    konfirmasi === password ? setValidasi(false) : setValidasi(true);
-    swal({
-      title: "Apakah data anda sudah benar?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((benar) => {
-      if (benar) {
-        register();
-        swal("Terimakasih telah mendaftar", {
-          icon: "success",
-        });
-      } 
-    });
+    const errMessage = {
+        nama_lengkap : "",
+        email        : "",
+        nik          : "",
+        password     : "",
+        konfirmasi_password : "",
+    }
+
+    console.log(nama);
+    if(nama === ""){
+     errMessage["nama_lengkap"] = "nama lengkap wajib terisi";
+    }
+    if(email2 === ""){
+     errMessage["email"] = "email wajib terisi";
+    }
+    if(nik2 === ""){
+     errMessage["nik"] = "NIK wajib terisi";
+    }
+    if(password2 === ""){
+     errMessage["password"] = "Password wajib terisi";
+    }
+    if(konfirmasi2 === ""){
+     errMessage["konfirmasi_password"] = "Konfirmasi Password wajib terisi";
+    }else if(password2 !== konfirmasi2){
+      errMessage["konfirmasi_password"] = "Konfirmasi Password tidak sama dengan password";
+    }
+    setErrMsg(errMessage);
+
+    // konfirmasi === password ? setValidasi(false) : setValidasi(true);
+    const {nama_lengkap, email, nik, password, konfirmasi_password} = errMessage; 
+  if(nama_lengkap === "" && email === "" && nik === "" && password === "" && konfirmasi_password === ""){
+        swal({
+        title: "Apakah data anda sudah benar?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((benar) => {
+        if (benar) {
+          register();
+          swal("Terimakasih telah mendaftar", {
+            icon: "success",
+          });
+        } 
+      });
+  }
     
    
   };
+
+  console.log(errMsg);
   return (
     <div className="flex justify-center items-center h-[90vh] mt-[90px] mb-20">
       <form
@@ -68,62 +108,63 @@ const Daftar = () => {
             Nama Lengkap
           </label>
           <input
-            className="mb-8 border-b-[3px] border-[#1B69B3] focus:outline-none"
+            className="border-b-[3px] border-[#1B69B3] focus:outline-none"
             type="text"
             name="nama"
             value={nama}
             onChange={(e) => setNama(e.target.value)}
-            required
           />
-          <label htmlFor="email" className="mb-3">
+          {errMsg.nama_lengkap && <span className="text-red-500">{errMsg.nama_lengkap}</span>}
+          <label htmlFor="email" className="mb-3 mt-6">
             Email
           </label>
           <input
-            className="mb-8 border-b-[3px] border-[#1B69B3] focus:outline-none"
+            className="border-b-[3px] border-[#1B69B3] focus:outline-none"
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            value={email2}
+            onChange={(e) => setEmail2(e.target.value)}
           />
-          <label htmlFor="nik" className="mb-3">
+          {errMsg.email && <span className="text-red-500">{errMsg.email}</span>}
+          <label htmlFor="nik" className="mb-3 mt-6">
             NIK
           </label>
           <input
-            className="mb-8 border-b-[3px] border-[#1B69B3] focus:outline-none"
+            className="border-b-[3px] border-[#1B69B3] focus:outline-none"
             type="text"
             name="nik"
-            value={nik}
-            onChange={(e) => setNik(e.target.value)}
-            required
+            value={nik2}
+            onChange={(e) => setNik2(e.target.value)}
           />
-          <label htmlFor="password" className="mb-3">
+          {errMsg.nik && <span className="text-red-500">{errMsg.nik}</span>}
+          <label htmlFor="password" className="mb-3 mt-6">
             Password
           </label>
           <input
-            className="mb-8 border-b-[3px] border-[#1B69B3] focus:outline-none"
+            className="border-b-[3px] border-[#1B69B3] focus:outline-none"
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
           />
-          <label htmlFor="konfirmasi" className="mb-3">
+          {errMsg.password && <span className="text-red-500">{errMsg.password}</span>}
+          <label htmlFor="konfirmasi" className="mb-3 mt-6">
             Konfirmasi Password
           </label>
           <input
             className="border-b-[3px] border-[#1B69B3] focus:outline-none"
             type="password"
             name="konfirmasi"
-            value={konfirmasi}
-            onChange={(e) => setKonfirmasi(e.target.value)}
-            required
+            value={konfirmasi2}
+            onChange={(e) => setKonfirmasi2(e.target.value)}
           />
-          {validasi && (
+         {errMsg.konfirmasi_password && <span className="text-red-500">{errMsg.konfirmasi_password}</span>}
+
+          {/* {validasi && (
             <small className="text-left text-[#c51111] text-sm">
               Konfrimasi berbeda dengan password
             </small>
-          )}
+          )} */}
           <button
             className="w-[329px] h-[43px] mx-auto mb-2 mt-8"
             type="submit"

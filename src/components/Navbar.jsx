@@ -20,7 +20,7 @@ const Navbar = ({ dataUser }) => {
   };
 
   return (
-    <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center px-[26px] bg-[#1B69B3] z-[999]">
+    <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center pl-[26px] bg-[#1B69B3] z-[999]">
       <div>
         <img
           src={require("../assets/img/logo-kai-access.jpg")}
@@ -30,37 +30,36 @@ const Navbar = ({ dataUser }) => {
       </div>
 
       <ul className="flex text-white font-bold font h-full items-center">
-        <Link to="beranda" className="h-full flex items-center">
+        <Link to="beranda" className="h-full flex items-center"  onClick={() => handleActiveNav("beranda")}>
           <li
-            className="nav-item beranda flex items-center px-1"
-            onClick={() => handleActiveNav("beranda")}
+            className="nav-item beranda flex items-center px-8"
           >
             <FaHome size={25} />
             <span className="ml-2">Beranda</span>
           </li>
         </Link>
-        <Link to="tiket" className="ml-3 md:ml-10 h-full flex items-center">
+        <Link to="tiket" onClick={() => handleActiveNav("tiket")} className="h-full flex items-center">
           <li
-            className="nav-item tiket flex items-center px-1"
-            onClick={() => handleActiveNav("tiket")}
+            className="nav-item tiket flex items-center px-8"
+            
           >
             <FaTicketAlt size={25} />
             <span className="ml-2">Tiket</span>
           </li>
         </Link>
-        <Link to="riwayat" className="ml-3 md:ml-10 h-full flex items-center">
+        <Link  onClick={() => handleActiveNav("riwayat")} to="riwayat" className="h-full flex items-center">
           <li
-            className="nav-item riwayat flex items-center px-1"
-            onClick={() => handleActiveNav("riwayat")}
+            className="nav-item riwayat flex items-center px-8"
+           
           >
             <FaHistory size={20} />
-            <span className="ml-2">Riwayat</span>
+            <span className="">Riwayat</span>
           </li>
         </Link>
-        <Link to="/" className="ml-3 md:ml-10 h-full flex items-center">
+        <Link to="/"  onClick={() => handleActiveNav("login")} className="h-full flex items-center">
           <li
-            className="nav-item login flex items-center px-1"
-            onClick={() => handleActiveNav("login")}
+            className="nav-item login flex items-center px-8"
+           
           >
             <MdAccountCircle size={27} />
             <span className="ml-2">{dataUser.nama || "Akun"}</span>

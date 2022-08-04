@@ -3,6 +3,8 @@ import TiketItem from "../components/TiketItem";
 import { axiosGet } from "../api/instanceAxios";
 import { useState } from "react";
 import Tiket from "./Tiket";
+import { TicketEmpty } from "../components/TicketEmpty";
+import { TbReportSearch, TbTicketOff } from "react-icons/tb";
 
 const RiwayatTiket = () => {
   const [tiketList, setTiketList] = useState([]);
@@ -20,20 +22,31 @@ const RiwayatTiket = () => {
     };
     token && getTiket();
   }, []);
-
+console.log(tiketList.length === 0);
   return (
     <div className="flex justify-center mt-24 mb-10">
-      {!isToken && (
-        <div className="w-full">
-          <Tiket />
+      {isToken && tiketList.length !== 0 && (
+        <div className="w-3/5">
+          {tiketList.map((tiket) => (
+            <TiketItem key={tiket.id_tiket_user} {...tiket} />
+          ))}
         </div>
       )}
 
-      {isToken && (
-        <div className="w-3/5">
-          {tiketList?.map((tiket) => (
-            <TiketItem key={tiket.id_tiket_user} {...tiket} />
-          ))}
+        {(isToken && tiketList.length === 0) && (
+          <div className="w-96 flex justify-center text-center">
+              <TicketEmpty
+                title="Riwayat transaksimu masih kosong!"
+                description="lengkapi perjalanan menakjubkan anda bersama kami"
+              >
+                <TbReportSearch size={120} />
+              </TicketEmpty>
+          </div>
+        )}
+
+      {!isToken && (
+        <div className="w-full">
+          <Tiket />
         </div>
       )}
     </div>

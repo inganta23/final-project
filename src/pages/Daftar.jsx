@@ -52,10 +52,10 @@ const Daftar = () => {
 
     console.log(nama);
     if(nama === ""){
-     errMessage["nama_lengkap"] = "nama lengkap wajib terisi";
+     errMessage["nama_lengkap"] = "Nama lengkap wajib terisi";
     }
     if(email2 === ""){
-     errMessage["email"] = "email wajib terisi";
+     errMessage["email"] = "Email wajib terisi";
     }
     if(nik2 === ""){
      errMessage["nik"] = "NIK wajib terisi";
@@ -92,19 +92,18 @@ const Daftar = () => {
    
   };
 
-  console.log(errMsg);
   return (
-    <div className="flex justify-center items-center h-[90vh] mt-[90px] mb-20">
+    <div className="flex justify-center items-center h-[90vh] mb-20 mt-40">
       <form
-        className="flex flex-col w-[520px] bg-[#fff] rounded-xl"
+        className="flex flex-col w-1/3 bg-[#fff] rounded-xl shadow-lg"
         onSubmit={handleDaftar}
       >
         <div className="mx-auto">
-          <img src={require("../assets/img/image 93.png")} alt="Login" />
+          <img src={require("../assets/img/logo-KAI.png")} alt="Login" className="w-40 pt-12 pb-4 px-6" />
         </div>
-        <div className="w-[356px] mx-auto flex flex-col">
-          <h2 className="text-center text-[#605F5F] mb-7">Daftar Akun</h2>
-          <label htmlFor="nama" className="mb-3">
+        <div className=" mx-10 flex flex-col">
+          <h2 className="text-center text-[#605F5F] mb-4  text-2xl">Daftar Akun</h2>
+          <label htmlFor="nama" className="">
             Nama Lengkap
           </label>
           <input
@@ -115,18 +114,18 @@ const Daftar = () => {
             onChange={(e) => setNama(e.target.value)}
           />
           {errMsg.nama_lengkap && <span className="text-red-500">{errMsg.nama_lengkap}</span>}
-          <label htmlFor="email" className="mb-3 mt-6">
+          <label htmlFor="email" className=" mt-6">
             Email
           </label>
           <input
             className="border-b-[3px] border-[#1B69B3] focus:outline-none"
-            type="email"
+            type="text"
             name="email"
             value={email2}
             onChange={(e) => setEmail2(e.target.value)}
           />
           {errMsg.email && <span className="text-red-500">{errMsg.email}</span>}
-          <label htmlFor="nik" className="mb-3 mt-6">
+          <label htmlFor="nik" className="mt-6">
             NIK
           </label>
           <input
@@ -137,7 +136,7 @@ const Daftar = () => {
             onChange={(e) => setNik2(e.target.value)}
           />
           {errMsg.nik && <span className="text-red-500">{errMsg.nik}</span>}
-          <label htmlFor="password" className="mb-3 mt-6">
+          <label htmlFor="password" className="mt-6">
             Password
           </label>
           <input
@@ -148,7 +147,7 @@ const Daftar = () => {
             onChange={(e) => setPassword2(e.target.value)}
           />
           {errMsg.password && <span className="text-red-500">{errMsg.password}</span>}
-          <label htmlFor="konfirmasi" className="mb-3 mt-6">
+          <label htmlFor="konfirmasi" className="mt-6">
             Konfirmasi Password
           </label>
           <input
@@ -171,9 +170,9 @@ const Daftar = () => {
           >
             <b>Daftar</b>
           </button>
-          <small className="text-center text-[#AFAEAE] text-base mb-16">
-            Sudah memiliki akun?
-            <Link to="/login" className="text-[#1B69B3] hover:underline">
+          <small className="text-center text-[#AFAEAE] text-base mb-12">
+            <p className="inline-block mr-2">Sudah memiliki akun?</p>
+            <Link to="/" className="text-[#1B69B3] hover:underline">
               Login Sekarang
             </Link>
           </small>

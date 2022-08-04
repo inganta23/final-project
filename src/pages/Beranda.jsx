@@ -9,14 +9,17 @@ import {
 } from "react-icons/fa";
 import { RiArrowLeftRightFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode, Pagination } from "swiper";
+import "swiper/css/bundle";
 
 const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
   const navigate = useNavigate();
   const [asal, setAsal] = useState("");
   const [date, setDate] = useState("");
-  const [kelas, setKelas] = useState("");
+  const [kelas, setKelas] = useState("ekonomi");
   const [tujuan, setTujuan] = useState("");
-  const [penumpang, setPenumpang] = useState(0);
+  const [penumpang, setPenumpang] = useState(1);
 
   const getTiket = async (newDate) => {
     try {
@@ -24,15 +27,15 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
         `http://localhost:9000/api/v1/tiket?tgl_berangkat=${newDate}&stasiun_berangkat=${asal}&stasiun_tujuan=${tujuan}&kelas=${kelas}`
       );
       setTiket(res.data.data)
-      setTglBerangkat(newDate);
+      await setTglBerangkat(newDate);
     } catch (err) {
       console.error(err);
     }
   };
-  const handleTiketSubmit = (e) => {
+  const handleTiketSubmit = async (e) => {
     e.preventDefault();
     const newDate = date.split("-").reverse().join("-");
-    getTiket(newDate);
+    await getTiket(newDate);
     navigate("/list-tiket");
   };
 
@@ -41,27 +44,61 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
   },[penumpang])
 
   return (
-    <div className="flex flex-col items-center mt-[140px]">
-      <div className="p-5 md:p-10 bg-white flex items-center justify-center gap-5 rounded-xl relative flex-wrap m-6 max-w-[80%]">
-        <Link to="/" className="absolute top-[-30px] left-0">
-          <p className="text-lg text-left font-bold text-[#1B69B3]">
-            Pemberitahuan
+    <div className="flex flex-col items-center mt-[130px]">
+      <section className="w-5/6 shadow-lg">
+        <div className="flex justify-between text-lg font-bold text-[#1B69B3]">
+          <p>
+            Spesial di KAI Access
           </p>
-        </Link>
-        <img
-          src={require("../assets/img/annoncement(1).png")}
-          alt="pemberitahuan"
-        />
-        <img
-          src={require("../assets/img/annoncement(1).png")}
-          alt="pemberitahuan"
-        />
-        <img
-          src={require("../assets/img/annoncement(1).png")}
-          alt="pemberitahuan"
-        />
-      </div>
-      <div className="flex w-[80%] lg:w-[960px] bg-white justify-between p-8 rounded-xl m-6 flex-wrap">
+          <p className="capitalize">
+            lihat semua
+          </p>
+        </div>
+        <div className="py-5 px-4 bg-white rounded-xl">
+            <Swiper
+                    slidesPerView={3}
+                    spaceBetween={10}
+                    freeMode={true}
+                    loop={true}
+                    autoplay={{
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    }}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    modules={[FreeMode, Pagination, Autoplay]}
+                    className="mySwiper"
+                  >
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-1.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-2.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-3.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-4.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-5.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                    <SwiperSlide> <img className="h-44 w-full"
+                      src={require("../assets/img/kai-promo-6.jpg")}
+                      alt="pemberitahuan"
+                    /></SwiperSlide>
+                  </Swiper>
+        </div>
+      </section>
+
+      <div className="flex w-3/5 lg:w-3/5 bg-white justify-between p-8 rounded-xl m-6 flex-wrap shadow-lg">
         <div className="flex items-center gap-3">
           <FaTrophy color="#AFAEAE" size={70} />
           <div>
@@ -77,7 +114,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
           </div>
         </div>
       </div>
-      <div className="bg-white rounded-xl p-10 w-[80%] lg:w-[960px] m-6">
+      <div className="bg-white rounded-xl p-10 w--1/3 lg:w-3/5 mx-6 mb-12 shadow-lg">
         <form
           className="flex flex-col justify-center items-center"
           onSubmit={handleTiketSubmit}
@@ -89,7 +126,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
               </label>
               <select
                 name="asal"
-                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                className="uppercase cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
                 value={asal}
                 onChange={(e) => setAsal(e.target.value)}
                 required
@@ -97,7 +134,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
                 <option value="">None</option>
                 {stasiun?.map((asal, index) => (
                   <option key={index} value={asal.nama}>
-                    {asal.nama}
+                    {asal.nama + ` (${asal.inisial_stasiun}) `}
                   </option>
                 ))}
               </select>
@@ -113,7 +150,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
               </label>
               <select
                 name="tujuan"
-                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                className="uppercase cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
                 value={tujuan}
                 onChange={(e) => setTujuan(e.target.value)}
                 required
@@ -121,7 +158,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
                 <option value="">None</option>
                 {stasiun?.map((tujuan, index) => (
                   <option key={index} value={tujuan.nama}>
-                    {tujuan.nama}
+                    {tujuan.nama + ` (${tujuan.inisial_stasiun}) `}
                   </option>
                 ))}
               </select>
@@ -158,8 +195,7 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
                 onChange={(e) => setKelas(e.target.value)}
                 required
               >
-                <option value="">None</option>
-                <option value="ekonomi">Ekonomi</option>
+                <option value="ekonomi" defaultChecked >Ekonomi</option>
                 <option value="bisnis">Bisnis</option>
               </select>
             </div>
@@ -168,14 +204,18 @@ const Beranda = ({ setTiket, stasiun, setTglBerangkat }) => {
                 Penumpang
               </label>
               <div className="flex gap-5">
-                <input
-                  className="border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
-                  value={penumpang}
-                  onChange={(e) => setPenumpang(e.target.value)}
-                  type="number"
-                  name="penumpang"
-                  required
-                />
+              <select
+                name="kelas"
+                className="cursor-pointer border-b-[3px] border-[#1B69B3] text-[#1B69B3] placeholder:text-[#1B69B3] focus:outline-none w-full"
+                value={penumpang}
+                onChange={(e) => setPenumpang(e.target.value)}
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
               </div>
             </div>
           </div>

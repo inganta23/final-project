@@ -2,6 +2,7 @@ import React from 'react';
 import { CgChevronRight } from "react-icons/cg";
 import logoKai from "../assets/img/logo-KAI.png";
 import { convertMonth } from "../utils/convertDate";
+import { convertToRupiah } from '../utils/convertToRupiah';
 
 export const CardTravel = ({className, tiket}) => {
   return (
@@ -22,8 +23,8 @@ export const CardTravel = ({className, tiket}) => {
           </p>
         </div>
         <div className="flex-1 text-right">
-          <p className="text-lg uppercase text-midBlue font-bold">
-            Rp. {tiket?.harga_tiket}
+          <p className="text-lg capitalize text-midBlue font-bold">
+            {convertToRupiah(tiket?.harga_tiket)}
           </p>
           <p className="text-xs capitalize mt-1 text-green-500 font-semibold">
             Tersedia

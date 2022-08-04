@@ -9,6 +9,7 @@ import {  useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import swal from 'sweetalert'
+import { convertToRupiah } from '../utils/convertToRupiah'
 
 export const PayTicket = ({tiket, dataUser}) => {
   const navigate = useNavigate();
@@ -65,21 +66,24 @@ export const PayTicket = ({tiket, dataUser}) => {
       <div className="flex justify-center mt-24">
         <div className="w-3/5">
           <Title name={"Detail Perjalanan"} />
-          <CardTravel tiket={tiket[id]}/>
+          <CardTravel tiket={tiket[id]} />
           <Title name={"Detail Pembeli"} className="mt-4" />
-          <CardContact dataUser={dataUser}/>
+          <CardContact dataUser={dataUser} />
           <Title name={"Detail Harga"} className="mt-4" />
           <div className="shadow-lg p-4 rounded-lg bg-white flex justify-between">
             <div className="font-bold">Total Harga </div>
-            <div className="font-bold text-midBlue">Rp {tiket[id].harga_tiket * localStorage.getItem('penumpang')}</div>
+            <div className="font-bold text-midBlue">
+              {convertToRupiah(
+                tiket[id].harga_tiket * localStorage.getItem("penumpang")
+              )}
+            </div>
           </div>
           <Title name={"Layanan"} className="mt-4" />
           <CardService />
         </div>
       </div>
-     
-      <Button name="bayar" handleOnClick={()=>handleBayar(tiket[id])}/>
-     
+
+      <Button name="bayar" handleOnClick={() => handleBayar(tiket[id])} />
     </div>
   );
 }

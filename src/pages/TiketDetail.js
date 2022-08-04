@@ -76,7 +76,7 @@ export const TiketDetail = () => {
             <div className="flex justify-between items-center border-y-2 border-lightGrey py-3">
               <div>
                 <p className="text-base text-carbonGrey">Kode Pemesanan</p>
-                <h2 className="text-carbonGrey">LM27NV</h2>
+                <h2 className="text-carbonGrey">{tiket?.kode_tiket}</h2>
               </div>
               <div className="object-contain">
                 <img src={require("../assets/img/barcode.png")} alt="barcode" />
@@ -173,10 +173,9 @@ export const TiketDetail = () => {
           </div>
         </div>
       </div>
-      <Button
-        handleOnClick={handleClickCheckTiket}
-        name={"Check TIket"}
-      />
+      {tiket?.status !== "nonaktif" && (
+        <Button handleOnClick={handleClickCheckTiket} name={"Check TIket"} />
+      )}
     </>
   );
 }

@@ -1,12 +1,24 @@
 import React from 'react'
 import {FaSignOutAlt} from 'react-icons/fa'
-import {FaChevronRight} from 'react-icons/fa'
+import swal from 'sweetalert'
 
 const Logout = ({dataUser, setIsLoggedIn}) => {
     const handleLogout = ( ) =>{
+   swal({
+      title: "Apakah anda yakin Keluar?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willBuy) => {
+      if (willBuy) {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
+      } 
+    });
     }
+
+    
   return (
     <div className='mt-[100px] flex justify-center items-center h-[85vh]'>
         <div className='w-1/2 bg-[#FFFEFE] text-[#605F5F] rounded-xl p-5'>

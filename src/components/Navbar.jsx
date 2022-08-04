@@ -32,7 +32,7 @@ const Navbar = ({ dataUser }) => {
       <ul className="flex text-white font-bold font h-full items-center">
         <Link to="beranda" className="h-full flex items-center"  onClick={() => handleActiveNav("beranda")}>
           <li
-            className="nav-item beranda flex items-center px-8"
+            className="nav-item beranda flex items-center px-6"
           >
             <FaHome size={25} />
             <span className="ml-2">Beranda</span>
@@ -40,7 +40,7 @@ const Navbar = ({ dataUser }) => {
         </Link>
         <Link to="tiket" onClick={() => handleActiveNav("tiket")} className="h-full flex items-center">
           <li
-            className="nav-item tiket flex items-center px-8"
+            className="nav-item tiket flex items-center px-6"
             
           >
             <FaTicketAlt size={25} />
@@ -49,7 +49,7 @@ const Navbar = ({ dataUser }) => {
         </Link>
         <Link  onClick={() => handleActiveNav("riwayat")} to="riwayat" className="h-full flex items-center">
           <li
-            className="nav-item riwayat flex items-center px-8"
+            className="nav-item riwayat flex items-center px-6"
            
           >
             <FaHistory size={20} />
@@ -58,7 +58,7 @@ const Navbar = ({ dataUser }) => {
         </Link>
         <Link to="/"  onClick={() => handleActiveNav("login")} className="h-full flex items-center">
           <li
-            className="nav-item login flex items-center px-8"
+            className="nav-item login flex items-center px-6"
            
           >
             <MdAccountCircle size={27} />

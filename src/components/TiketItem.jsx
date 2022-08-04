@@ -12,7 +12,8 @@ const TiketItem = (
     stasiun_berangkat_inisial,
     stasiun_tujuan,
     stasiun_tujuan_inisial,
-    tanggal_berangkat
+    tanggal_berangkat,
+    kode_tiket
 }) => {
   
   return (
@@ -37,7 +38,7 @@ const TiketItem = (
           <div className="flex justify-between items-center border-y-2 border-lightGrey py-3">
             <div>
               <p className="text-base text-carbonGrey">Kode Pemesanan</p>
-              <h2 className="text-carbonGrey">LM27NV</h2>
+              <h2 className="text-carbonGrey">{kode_tiket}</h2>
             </div>
             <div className="object-contain">
               <img src={require("../assets/img/barcode.png")} alt="barcode" />

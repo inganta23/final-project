@@ -3,6 +3,8 @@ import TiketItem from "../components/TiketItem";
 import {axiosGet} from "../api/instanceAxios";
 import { useState } from "react";
 import Tiket from "./Tiket";
+import { TicketEmpty } from "../components/TicketEmpty";
+import { TbTicketOff } from "react-icons/tb";
 
 const TiketLogin = () => {
   const [tiketList, setTiketList] = useState([]);
@@ -29,7 +31,18 @@ const TiketLogin = () => {
         </div>
       }
 
-      {isToken &&  
+        {(isToken &&  tiketList.length === 0) && (
+          <div className="w-96 flex justify-center text-center">
+              <TicketEmpty
+                title="Kamu belum memiliki tiket."
+                description="Ayo pesan tiket keberangkatan sekarang! Tiket kamu akan ditampilkan disini."
+              >
+                <TbTicketOff size={120}/>
+              </TicketEmpty>
+          </div>
+        )}
+
+      {(isToken && tiketList.length !== 0) &&  
       <div className="w-3/5">
         {tiketList?.map((tiket)=>(<TiketItem key={tiket.id_tiket_user} {...tiket} />))}
       </div>

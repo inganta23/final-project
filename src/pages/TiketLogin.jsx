@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import TiketItem from "../components/TiketItem";
 import {axiosGet} from "../api/instanceAxios";
 import { useState } from "react";
-import Tiket from "./Tiket";
 import { TicketEmpty } from "../components/TicketEmpty";
 import { TbTicketOff } from "react-icons/tb";
 
@@ -25,11 +24,6 @@ const TiketLogin = () => {
 
    return (
     <div className="flex justify-center mt-24 mb-10">
-     {!isToken && 
-        <div className="w-full">
-          <Tiket />
-        </div>
-      }
 
         {(isToken &&  tiketList.length === 0) && (
           <div className="w-96 flex justify-center text-center">

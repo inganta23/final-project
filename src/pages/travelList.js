@@ -27,8 +27,7 @@ useEffect(() => {
 }, [])
 
   const handleClickTiket = (index) => {
-    if (localStorage.getItem("token")) navigate(`/beli-tiket/${index}`);
-    else alert("Silahkan Login Dahulu");
+     navigate(`/beli-tiket/${index}`);
   };
 
   if (tikets.tikets === ""){

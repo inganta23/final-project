@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavStore } from "../store/navigasiStore";
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginMsg, setIsLoginMsg] = useState(false)
+  const setNavActive = useNavStore((state) => state.addNavActive); 
 
   const login = async () => {
     try {
@@ -18,7 +20,8 @@ const Login = ({ setIsLoggedIn }) => {
       if(res.data.message !== "login gagal"){
         localStorage.setItem("token", res.data.data.token);
         setIsLoggedIn(true);
-        navigate("/beranda");
+        navigate("/");
+        setNavActive("beranda");
         setIsLoginMsg(false);
       }else{
         setIsLoginMsg(true);

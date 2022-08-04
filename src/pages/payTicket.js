@@ -10,11 +10,14 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import swal from 'sweetalert'
 import { convertToRupiah } from '../utils/convertToRupiah'
+import { useNavStore } from '../store/navigasiStore'
 
 export const PayTicket = ({tiket, dataUser}) => {
-  const navigate = useNavigate();
-  const {id} = useParams();
+
+  const navigate            = useNavigate();
+  const {id}                = useParams();
   const [detail, setDetail] = useState();
+  const setNavActive        = useNavStore((state) => state.addNavActive); 
 
   const bayar = async(tiket) =>{
     try {
@@ -57,6 +60,7 @@ export const PayTicket = ({tiket, dataUser}) => {
 
   useEffect(()=>{
     if(detail?.data?.data?.id){
+      setNavActive("tiket");
       navigate(`/detail-tiket/${detail.data.data.id}`)
     }
   },[detail])

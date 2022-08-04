@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Logout from "./components/Logout";
+import { UserAuthentication } from "./components/UserAuthentication";
 
 function App() {
   const [stasiun, setStasiun] = useState();
@@ -58,7 +59,7 @@ function App() {
       />
       <Routes>
         <Route
-          index
+          path="/login"
           element={
             isLoggedIn ? (
               <Logout setIsLoggedIn={setIsLoggedIn} dataUser={dataUser} />
@@ -68,9 +69,9 @@ function App() {
           }
         />
         <Route path="daftar" element={<Daftar />} />
-        <Route path="tiketd" element={<Tiket />} />
         <Route
-          path="beranda"
+          index
+          path="/"
           element={
             <Beranda
               setTiket={setTiket}
@@ -79,23 +80,35 @@ function App() {
             />
           }
         />
+
         <Route
           path="list-tiket"
-          element={<TravelList tikets={tiket} setTiketGlobal={setTiket} tglBerangkat={tglBerangkat} />}
-        />
-        <Route
-          path="beli-tiket/:id"
           element={
-            <PayTicket
-              tiket={tiket}
-              dataUser={dataUser}
-              setDataUser={setDataUser}
+            <TravelList
+              tikets={tiket}
+              setTiketGlobal={setTiket}
+              tglBerangkat={tglBerangkat}
             />
           }
         />
-        <Route path="tiket" element={<TiketLogin />} />
-        <Route path="riwayat" element={<RiwayatTiket />} />
-        <Route path="detail-tiket/:tiketUserId" element={<TiketDetail />} />
+
+        {/* Private Route */}
+        <Route path="/" element={<UserAuthentication />}>
+          <Route
+            path="beli-tiket/:id"
+            element={
+              <PayTicket
+                tiket={tiket}
+                dataUser={dataUser}
+                setDataUser={setDataUser}
+              />
+            }
+          />
+
+          <Route path="tiket" element={<TiketLogin />} />
+          <Route path="riwayat" element={<RiwayatTiket />} />
+          <Route path="detail-tiket/:tiketUserId" element={<TiketDetail />} />
+        </Route>
       </Routes>
     </div>
   );

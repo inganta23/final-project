@@ -5,6 +5,7 @@ import { axiosGet, axiosPostWithToken } from '../api/instanceAxios';
 import { convertMonth } from '../utils/convertDate';
 import { convertToRupiah } from '../utils/convertToRupiah';
 import { Button } from '../components/Button';
+import { useNavStore } from '../store/navigasiStore';
 
 export const TiketDetail = () => {
 
@@ -12,6 +13,7 @@ export const TiketDetail = () => {
   const [tiket, setTiket]     = useState({});
   const [nikList, setNikList] = useState([]);
   const { tiketUserId }       = useParams();
+  const setNavActive = useNavStore((state) => state.addNavActive); 
   const navigate              = useNavigate();
   
   useEffect(() => {
@@ -21,6 +23,7 @@ export const TiketDetail = () => {
         const { data } = await axiosGet(`/tiket-user/${tiketUserId}?status=aktif`, token);
         setTiket(data.data);
         setToken(token);
+        setNavActive(data.data.status === "nonaktif" ? "riwayat" : "tiket");
 
         const {total_penumpang, user_nik} = data.data;
         const nikList = [];

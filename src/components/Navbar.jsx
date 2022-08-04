@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaTicketAlt, FaHistory } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
-import jwtDecode from "jwt-decode";
+import { useNavStore } from "../store/navigasiStore";
 
 const Navbar = ({ dataUser }) => {
+ const navActive = useNavStore((state) => state.navActive); 
+ const setNavActive = useNavStore((state) => state.addNavActive); 
+  useEffect(() => {
+    let navActive = "beranda";
+    const url = window.location.href;
+    if(url.includes("tiket")) navActive = "tiket";
+    if(url.includes("riwayat")) navActive = "riwayat";
+    if(url.includes("login") || url.includes("daftar")) navActive = "user";
+    setNavActive(navActive)
+  }, [])
+  
 
-  const handleActiveNav = (elm) => {
-    let nav_list = document.getElementsByClassName("nav-item");
-    let target_nav = document.getElementsByClassName(elm);
-    for (let i = 0; i < nav_list.length; i++) {
-      nav_list[i].classList.remove("bg-white");
-      nav_list[i].classList.remove("h-full");
-      nav_list[i].classList.remove("text-[#1B69B3]");
-    }
-    target_nav[0].classList.add("bg-white");
-    target_nav[0].classList.add("h-full");
-    target_nav[0].classList.add("text-[#1B69B3]");
-  };
+  const handleActiveNav = (dt) => setNavActive(dt)
 
   return (
     <nav className="fixed top-0 right-0 left-0 h-[71px] flex justify-between items-center pl-[26px] bg-[#1B69B3] z-[999]">
@@ -30,35 +30,35 @@ const Navbar = ({ dataUser }) => {
       </div>
 
       <ul className="flex text-white font-bold font h-full items-center">
-        <Link to="beranda" className="h-full flex items-center"  onClick={() => handleActiveNav("beranda")}>
+        <Link to="/" className="h-full flex" >
           <li
-            className="nav-item beranda flex items-center px-6"
+            className={`nav-item beranda flex items-center px-6 ${navActive === "beranda" ? "bg-white text-[#1B69B3]" : ""}`} onClick={() => handleActiveNav("beranda")}
           >
             <FaHome size={25} />
             <span className="ml-2">Beranda</span>
           </li>
         </Link>
-        <Link to="tiket" onClick={() => handleActiveNav("tiket")} className="h-full flex items-center">
+        <Link to="tiket"  className="h-full flex">
           <li
-            className="nav-item tiket flex items-center px-6"
+            className={`nav-item beranda flex items-center px-6 ${navActive === "tiket" ? "bg-white text-[#1B69B3]" : ""}`} onClick={() => handleActiveNav("tiket")}
             
           >
             <FaTicketAlt size={25} />
             <span className="ml-2">Tiket</span>
           </li>
         </Link>
-        <Link  onClick={() => handleActiveNav("riwayat")} to="riwayat" className="h-full flex items-center">
+        <Link   to="riwayat" className="h-full flex">
           <li
-            className="nav-item riwayat flex items-center px-6"
+            className={`nav-item beranda flex items-center px-6 ${navActive === "riwayat" ? "bg-white text-[#1B69B3]" : ""}`} onClick={() => handleActiveNav("riwayat")}
            
           >
             <FaHistory size={20} />
-            <span className="">Riwayat</span>
+            <span className="ml-2">Riwayat</span>
           </li>
         </Link>
-        <Link to="/"  onClick={() => handleActiveNav("login")} className="h-full flex items-center">
+        <Link to="/login"   className="h-full flex">
           <li
-            className="nav-item login flex items-center px-6"
+            className={`nav-item beranda flex items-center px-6 ${navActive === "user" ? "bg-white text-[#1B69B3]" : ""}`} onClick={() => handleActiveNav("user")}
            
           >
             <MdAccountCircle size={27} />

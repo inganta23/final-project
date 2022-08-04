@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Tiket = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen mt-14">
       <div className="flex flex-col justify-center items-center w-[90%] md:w-[60%] max-w-[900px] py-5 md:py-[5rem] bg-[#fff] rounded-xl">
         <div>
           <img src={require("../assets/img/tiket-image.png")} alt="login first" />

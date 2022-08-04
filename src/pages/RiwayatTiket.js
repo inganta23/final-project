@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import TiketItem from "../components/TiketItem";
 import { axiosGet } from "../api/instanceAxios";
 import { useState } from "react";
-import Tiket from "./Tiket";
 import { TicketEmpty } from "../components/TicketEmpty";
-import { TbReportSearch, TbTicketOff } from "react-icons/tb";
+import { TbReportSearch } from "react-icons/tb";
 
 const RiwayatTiket = () => {
   const [tiketList, setTiketList] = useState([]);
@@ -22,7 +21,7 @@ const RiwayatTiket = () => {
     };
     token && getTiket();
   }, []);
-console.log(tiketList.length === 0);
+
   return (
     <div className="flex justify-center mt-24 mb-10">
       {isToken && tiketList.length !== 0 && (
@@ -44,11 +43,6 @@ console.log(tiketList.length === 0);
           </div>
         )}
 
-      {!isToken && (
-        <div className="w-full">
-          <Tiket />
-        </div>
-      )}
     </div>
   );
 };
